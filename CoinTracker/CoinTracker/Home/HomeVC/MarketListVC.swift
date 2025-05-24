@@ -10,6 +10,7 @@ import UIKit
 class MarketListVC: UIViewController {
     
     private var screen: MarketListView?
+    private var viewModel: MarketListViewModel = MarketListViewModel()
     
     override func loadView() {
         screen = MarketListView()
@@ -18,7 +19,21 @@ class MarketListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .red
+        viewModel.fetchRequest()
+        viewModel.setDelegate(self)
     }
 
 }
 
+extension MarketListVC: HomeViewModelProtocol {
+    func success() {
+        print("sucesso")
+    }
+    
+    func error(message: String) {
+        print("Erro")
+    }
+    
+    
+}
