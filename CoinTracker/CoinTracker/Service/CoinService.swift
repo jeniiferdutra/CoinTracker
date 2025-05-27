@@ -27,12 +27,12 @@ class CoinService {
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
-            if let error = error {
+            if let error {
                 completion(.failure(error))
                 return
             }
             
-            guard let data = data else {
+            guard let data else {
                 completion(.failure(ErrorDetail.detailError(detail: "Data is nil")))
                 return
             }
@@ -43,9 +43,11 @@ class CoinService {
             }
             
             do {
-                let coins = try JSONDecoder().decode([CoinElement].self, from: data)
+                let coins: [CoinElement] = try JSONDecoder().decode([CoinElement].self, from: data)
+                print("Sucess -> \(#function)")
                 completion(.success(coins))
             } catch {
+                print("Error -> \(#function)")
                 completion(.failure(error))
             }
         }
