@@ -11,16 +11,16 @@ class CoinTableViewCell: UITableViewCell {
     
     static let identifier: String = "CoinTableViewCell"
     
-    lazy var screen: CoinTableViewCellScreen = {
-        let view = CoinTableViewCellScreen()
+    lazy var screen: CoinTableViewCellView = {
+        let view = CoinTableViewCellView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 8
         return view
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
+        backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
         addViews()
         configConstrains()
     }
@@ -36,8 +36,8 @@ class CoinTableViewCell: UITableViewCell {
     private func configConstrains() {
         NSLayoutConstraint.activate([
             screen.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            screen.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            screen.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            screen.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            screen.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             screen.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8)
         ])
     }

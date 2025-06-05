@@ -18,7 +18,7 @@ enum ErrorDetail: Error {
 class CoinService {
     
     func fetchCoins(completion: @escaping (Result<[CoinElement], Error>) -> Void) {
-        let urlString = "https://run.mocky.io/v3/0ff5864d-504d-459c-952f-6ffe9ab0c693"
+        let urlString = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
         
         guard let url = URL(string: urlString) else {
             completion(.failure(ErrorDetail.errorURL(urlString: urlString)))
