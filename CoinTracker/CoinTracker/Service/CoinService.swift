@@ -18,7 +18,7 @@ enum ErrorDetail: Error {
 class CoinService {
     
     func fetchCoins(completion: @escaping (Result<[CoinElement], Error>) -> Void) {
-        let urlString = "https://run.mocky.io/v3/0ff5864d-504d-459c-952f-6ffe9ab0c693"
+        let urlString = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
         
         guard let url = URL(string: urlString) else {
             completion(.failure(ErrorDetail.errorURL(urlString: urlString)))
@@ -27,12 +27,12 @@ class CoinService {
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
-            if let error = error {
+            if let error {
                 completion(.failure(error))
                 return
             }
             
-            guard let data = data else {
+            guard let data else {
                 completion(.failure(ErrorDetail.detailError(detail: "Data is nil")))
                 return
             }
@@ -43,9 +43,11 @@ class CoinService {
             }
             
             do {
-                let coins = try JSONDecoder().decode([CoinElement].self, from: data)
+                let coins: [CoinElement] = try JSONDecoder().decode([CoinElement].self, from: data)
+                print("Sucess -> \(#function)")
                 completion(.success(coins))
             } catch {
+                print("Error -> \(#function)")
                 completion(.failure(error))
             }
         }
