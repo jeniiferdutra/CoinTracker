@@ -16,6 +16,10 @@ class MarketListVC: UIViewController {
         screen = MarketListView()
         view = screen
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,4 +59,8 @@ extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let coinDetail = CoinDetailVC()
+        present(coinDetail, animated: true)
+    }
 }
