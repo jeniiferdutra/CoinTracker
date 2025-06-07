@@ -139,7 +139,7 @@ class MarketListView: UIView {
     private func configConstraints() {
         NSLayoutConstraint.activate([
             helpButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            helpButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
+            helpButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
             worthLabel.topAnchor.constraint(equalTo: helpButton.bottomAnchor, constant: 25),
             worthLabel.leadingAnchor.constraint(equalTo: helpButton.leadingAnchor),
