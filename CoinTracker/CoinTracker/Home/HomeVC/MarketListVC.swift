@@ -60,7 +60,8 @@ extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let coinDetail = CoinDetailVC()
+        let selectedCoin = viewModel.loadCurrentCoins(indexPath: indexPath)
+        let coinDetail = CoinDetailVC(coin: selectedCoin)
         present(coinDetail, animated: true)
     }
 }
