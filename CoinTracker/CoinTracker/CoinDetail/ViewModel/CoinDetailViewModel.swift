@@ -73,6 +73,14 @@ class CoinDetailViewModel {
     var atl: String {
         return formatCurrency(coin.atl)
     }
+    
+    var roi: String {
+        if let percentage = coin.roi?.percentage {
+            return formatCurrency(percentage)
+        } else {
+            return "N/A"
+        }
+    }
 
     // MARK: - Private helpers
 

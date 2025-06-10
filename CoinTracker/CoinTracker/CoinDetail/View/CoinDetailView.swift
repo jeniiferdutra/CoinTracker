@@ -243,12 +243,46 @@ class CoinDetailView: UIView {
     
     //MARK: - 7. ROI (Retorno sobre o Investimento)
     
-    lazy var roiLabel: UILabel = {
+    lazy var returnOnInvestmentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "ROI (Return on Investment)"
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 22)
+        return label
+    }()
+    
+    lazy var roiTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "ROI"
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 19)
+        return label
+    }()
+    
+    lazy var roiLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 19)
+        return label
+    }()
+    
+    lazy var currencyTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Base currency"
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 19)
+        return label
+    }()
+    
+    lazy var currencyLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 19)
         return label
     }()
     
@@ -291,7 +325,10 @@ class CoinDetailView: UIView {
         contentView.addSubview(athPriceLabel)
         contentView.addSubview(atlLabel)
         contentView.addSubview(atlPriceLabel)
+        contentView.addSubview(returnOnInvestmentLabel)
+        contentView.addSubview(roiTitleLabel)
         contentView.addSubview(roiLabel)
+        contentView.addSubview(currencyTitleLabel)
     }
     
     private func configConstraints() {
@@ -314,7 +351,7 @@ class CoinDetailView: UIView {
             coinImageview.centerXAnchor.constraint(equalTo: centerXAnchor),
             coinImageview.leadingAnchor.constraint(equalTo: leadingAnchor),
             coinImageview.trailingAnchor.constraint(equalTo: trailingAnchor),
-            coinImageview.heightAnchor.constraint(equalToConstant: 250),
+            coinImageview.heightAnchor.constraint(equalToConstant: 230),
             
             coinNameLabel.topAnchor.constraint(equalTo: coinImageview.bottomAnchor, constant: 10),
             coinNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -384,10 +421,19 @@ class CoinDetailView: UIView {
             atlPriceLabel.topAnchor.constraint(equalTo: atlLabel.bottomAnchor, constant: 5),
             atlPriceLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
             
-            roiLabel.topAnchor.constraint(equalTo: atlPriceLabel.bottomAnchor, constant: 30),
+            returnOnInvestmentLabel.topAnchor.constraint(equalTo: atlPriceLabel.bottomAnchor, constant: 30),
+            returnOnInvestmentLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
+            
+            roiTitleLabel.topAnchor.constraint(equalTo: returnOnInvestmentLabel.bottomAnchor, constant: 15),
+            roiTitleLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
+            
+            roiLabel.topAnchor.constraint(equalTo: roiTitleLabel.bottomAnchor, constant: 5),
             roiLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
             
-            contentView.bottomAnchor.constraint(equalTo: roiLabel.bottomAnchor, constant: 30),
+            currencyTitleLabel.topAnchor.constraint(equalTo: roiLabel.bottomAnchor, constant: 15),
+            currencyTitleLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
+            
+            contentView.bottomAnchor.constraint(equalTo: currencyTitleLabel.bottomAnchor, constant: 30),
             contentView.bottomAnchor.constraint(greaterThanOrEqualTo: scrollView.bottomAnchor)
         ])
     }

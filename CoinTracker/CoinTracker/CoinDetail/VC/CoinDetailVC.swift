@@ -51,6 +51,7 @@ class CoinDetailVC: UIViewController {
             screen?.circulatingLabel.text = viewModel.circulatingSupplyFormatted
             screen?.athPriceLabel.text = viewModel.ath
             screen?.atlPriceLabel.text = viewModel.atl
+            screen?.roiLabel.text = viewModel.roi
         }
     }
 }
