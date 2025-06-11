@@ -52,6 +52,7 @@ class CoinDetailVC: UIViewController {
             screen?.athPriceLabel.text = viewModel.ath
             screen?.atlPriceLabel.text = viewModel.atl
             screen?.roiLabel.text = viewModel.roi
+            screen?.currencyLabel.text = viewModel.currency.uppercased()
         }
     }
 }

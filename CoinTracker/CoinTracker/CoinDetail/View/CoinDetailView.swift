@@ -256,7 +256,7 @@ class CoinDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "ROI"
-        label.textColor = .lightGray
+        label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 19)
         return label
     }()
@@ -264,7 +264,7 @@ class CoinDetailView: UIView {
     lazy var roiLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 19)
         return label
     }()
@@ -273,7 +273,7 @@ class CoinDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Base currency"
-        label.textColor = .lightGray
+        label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 19)
         return label
     }()
@@ -281,7 +281,7 @@ class CoinDetailView: UIView {
     lazy var currencyLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 19)
         return label
     }()
@@ -329,6 +329,7 @@ class CoinDetailView: UIView {
         contentView.addSubview(roiTitleLabel)
         contentView.addSubview(roiLabel)
         contentView.addSubview(currencyTitleLabel)
+        contentView.addSubview(currencyLabel)
     }
     
     private func configConstraints() {
@@ -433,7 +434,10 @@ class CoinDetailView: UIView {
             currencyTitleLabel.topAnchor.constraint(equalTo: roiLabel.bottomAnchor, constant: 15),
             currencyTitleLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
             
-            contentView.bottomAnchor.constraint(equalTo: currencyTitleLabel.bottomAnchor, constant: 30),
+            currencyLabel.topAnchor.constraint(equalTo: currencyTitleLabel.bottomAnchor, constant: 5),
+            currencyLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
+            
+            contentView.bottomAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: 30),
             contentView.bottomAnchor.constraint(greaterThanOrEqualTo: scrollView.bottomAnchor)
         ])
     }

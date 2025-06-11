@@ -76,13 +76,25 @@ class CoinDetailViewModel {
     
     var roi: String {
         if let percentage = coin.roi?.percentage {
-            return formatCurrency(percentage)
+            return formatPercentage(percentage)
         } else {
             return "N/A"
         }
     }
+    
+    var currency: String {
+        return coin.roi?.currency ?? "UNKNOWN"
+    }
 
     // MARK: - Private helpers
+    
+    private func formatPercentage(_ value: Double?) -> String {
+        guard let value = value else { return "0%" }
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 2
+        return formatter.string(from: NSNumber(value: value / 100)) ?? "0%"
+    }
 
     private func formatCurrency(_ value: Double?) -> String {
         guard let value = value else { return "$ 0,00" }
