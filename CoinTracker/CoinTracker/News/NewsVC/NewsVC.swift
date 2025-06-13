@@ -24,5 +24,18 @@ class NewsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.fetchRequest()
+        viewModel.setDelegate(delegate: self)
     }
+}
+
+extension NewsVC: NewsViewModelProtocol {
+    func success() {
+        print(#function)
+    }
+    
+    func error(message: String) {
+        print(#function)
+    }
+    
+    
 }
