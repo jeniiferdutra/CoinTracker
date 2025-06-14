@@ -30,12 +30,28 @@ class NewsVC: UIViewController {
 
 extension NewsVC: NewsViewModelProtocol {
     func success() {
-        print(#function)
+        DispatchQueue.main.async {
+            self.screen?.configTableViewProtocol(delegate: self, dataSource: self)
+            self.screen?.tableView.reloadData()
+        }
     }
     
     func error(message: String) {
         print(#function)
     }
+}
+
+extension NewsVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell
+        return cell ?? UITableViewCell()
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 420
+    }
 }

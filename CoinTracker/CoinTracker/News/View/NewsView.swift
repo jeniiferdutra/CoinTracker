@@ -21,7 +21,7 @@ class NewsView: UIView {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        // TO DO: Register
+        tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         tableView.backgroundColor = UIColor(red: 26/255, green: 26/255, blue: 1/255, alpha: 1.0)
         tableView.separatorStyle = .none
         return tableView
@@ -35,6 +35,11 @@ class NewsView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func configTableViewProtocol(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
+        tableView.delegate = delegate
+        tableView.dataSource = dataSource
     }
     
     private func addViews() {
