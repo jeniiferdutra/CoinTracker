@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices // utilizado p/ abrir páginas da web dentro do app com o Safari nativo (SFSafariViewController)
 
 class NewsVC: UIViewController {
     
@@ -25,6 +26,8 @@ class NewsVC: UIViewController {
         super.viewDidLoad()
         viewModel.fetchRequest()
         viewModel.setDelegate(delegate: self)
+        screen?.tableView.estimatedRowHeight = 420
+        screen?.tableView.rowHeight = UITableView.automaticDimension
     }
 }
 
@@ -52,7 +55,15 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
         return cell ?? UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 420
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = viewModel.loadCurrentCoins(indexPath: indexPath)
+        
+        guard let urlString = article.url, let url = URL(string: urlString) else {
+            print("URL inválida")
+            return
+        }
+        
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true)
     }
 }

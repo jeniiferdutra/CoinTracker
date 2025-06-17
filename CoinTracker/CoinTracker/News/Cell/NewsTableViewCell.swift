@@ -34,11 +34,10 @@ class NewsTableViewCell: UITableViewCell {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            
-            screen.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            screen.leadingAnchor.constraint(equalTo: leadingAnchor),
-            screen.trailingAnchor.constraint(equalTo: trailingAnchor),
-            screen.bottomAnchor.constraint(equalTo: bottomAnchor)
+            screen.topAnchor.constraint(equalTo: contentView.topAnchor),
+            screen.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            screen.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            screen.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
@@ -53,6 +52,18 @@ class NewsTableViewCell: UITableViewCell {
             }.resume()
             
             screen.titleLabel.text = data.title ?? ""
+            screen.sourceLabel.text = data.source?.name ?? "Fonte desconhecida"
+            screen.publishedAtLabel.text = formatRelativeDate(data.publishedAt)
+            screen.descriptionLabel.text = data.description ?? ""
         }
+    }
+    
+    private func formatRelativeDate(_ date: Date?) -> String {
+        guard let date = date else { return "Data desconhecida" }
+
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full // "5 days ago", "2 hours ago"
+        // formatter.locale = Locale(identifier: "pt_BR") // Descomente se quiser em português
+        return formatter.localizedString(for: date, relativeTo: Date())
     }
 }

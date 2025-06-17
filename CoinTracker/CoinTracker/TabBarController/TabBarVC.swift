@@ -17,7 +17,12 @@ class TabBarVC: UITabBarController {
     private func setupTabBar() {
         let home = UINavigationController(rootViewController: MarketListVC())
         let news = UINavigationController(rootViewController: NewsVC())
+        
+        home.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
+        news.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "newspaper"), tag: 1)
+        
         setViewControllers([home, news], animated: false)
+        
         tabBar.isTranslucent = false
         tabBar.tintColor = .white
         
