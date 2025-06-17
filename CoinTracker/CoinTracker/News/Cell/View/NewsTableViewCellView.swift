@@ -14,7 +14,6 @@ class NewsTableViewCellView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 19)
-        label.text = "Bitcoin's price surges to 60k"
         label.numberOfLines = 0
         return label
     }()
@@ -57,7 +56,6 @@ class NewsTableViewCellView: UIView {
     lazy var thumbnailImageView: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "exemple")
         img.contentMode = .scaleAspectFit
         img.clipsToBounds = true
         return img

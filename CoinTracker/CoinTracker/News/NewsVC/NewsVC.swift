@@ -43,11 +43,12 @@ extension NewsVC: NewsViewModelProtocol {
 
 extension NewsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel.numberOfRowsInSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell
+        cell?.setupCell(data: viewModel.loadCurrentCoins(indexPath: indexPath))
         return cell ?? UITableViewCell()
     }
     

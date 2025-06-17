@@ -34,4 +34,12 @@ class NewsViewModel {
             }
         }
     }
+    
+    public var numberOfRowsInSection: Int {
+        return articles.count
+    }
+    
+    public func loadCurrentCoins(indexPath: IndexPath) -> Article {
+        return articles[indexPath.row]
+    }
 }

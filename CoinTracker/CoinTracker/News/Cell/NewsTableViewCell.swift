@@ -8,7 +8,7 @@
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
-
+    
     static let identifier: String = String(describing: NewsTableViewCell.self)
     
     lazy var screen: NewsTableViewCellView = {
@@ -16,7 +16,7 @@ class NewsTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -40,5 +40,19 @@ class NewsTableViewCell: UITableViewCell {
             screen.trailingAnchor.constraint(equalTo: trailingAnchor),
             screen.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    public func setupCell(data: Article) {
+        if let imageUrl = URL(string: data.image ?? "") {
+            URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self.screen.thumbnailImageView.image = UIImage(data: data)
+                    }
+                }
+            }.resume()
+            
+            screen.titleLabel.text = data.title ?? ""
+        }
     }
 }
