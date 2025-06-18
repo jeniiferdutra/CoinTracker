@@ -16,8 +16,13 @@ class TabBarVC: UITabBarController {
     
     private func setupTabBar() {
         let home = UINavigationController(rootViewController: MarketListVC())
-        let logOut = UINavigationController(rootViewController: LoginVC())
-        setViewControllers([home, logOut], animated: false)
+        let news = UINavigationController(rootViewController: NewsVC())
+        
+        home.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
+        news.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "newspaper"), tag: 1)
+        
+        setViewControllers([home, news], animated: false)
+        
         tabBar.isTranslucent = false
         tabBar.tintColor = .white
         
@@ -30,6 +35,6 @@ class TabBarVC: UITabBarController {
         guard let itens = tabBar.items else { return }
         
         itens[0].image = UIImage(systemName: "homekit")
-        itens[1].image = UIImage(systemName: "rectangle.portrait.and.arrow.right")
+        itens[1].image = UIImage(systemName: "newspaper")
     }
 }

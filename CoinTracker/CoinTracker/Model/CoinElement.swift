@@ -11,7 +11,7 @@ struct CoinElement: Codable {
     var id, symbol, name: String?
     var image: String?
     var currentPrice: Double?
-    var marketCap, marketCapRank, fullyDilutedValuation, totalVolume: Int?
+    var marketCap, marketCapRank, fullyDilutedValuation, totalVolume: Double?
     var high24H, low24H, priceChange24H, priceChangePercentage24H: Double?
     var marketCapChange24H, marketCapChangePercentage24H, circulatingSupply, totalSupply: Double?
     var maxSupply: Double?
