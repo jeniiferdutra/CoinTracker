@@ -56,6 +56,42 @@ class LoginView: UIView {
         password.isSecureTextEntry = true
         return password
     }()
+    
+    lazy var signInButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Sign In", for: .normal)
+        btn.backgroundColor = .white
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        btn.setTitleColor(.black, for: .normal)
+        btn.clipsToBounds = true
+        btn.layer.cornerRadius = 8
+        //btn.addTarget(self, action: #selector(tappedCloseButton), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var signInLabel: UILabel = {
+        let signIn = UILabel()
+        signIn.translatesAutoresizingMaskIntoConstraints = false
+        signIn.text = "Or sign in with"
+        signIn.textColor = .white
+        signIn.font = UIFont.systemFont(ofSize: 14)
+        return signIn
+    }()
+    
+    lazy var googleImageView: UIImageView = {
+        let img = UIImageView()
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.image = UIImage(named: "google")
+        return img
+    }()
+    
+    lazy var xImageView: UIImageView = {
+        let img = UIImageView()
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.image = UIImage(named: "x")
+        return img
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,6 +109,10 @@ class LoginView: UIView {
         addSubview(emailTextField)
         addSubview(passwordLabel)
         addSubview(passwordTextField)
+        addSubview(signInButton)
+        addSubview(signInLabel)
+        addSubview(googleImageView)
+        addSubview(xImageView)
     }
     
     private func configConstraints() {
@@ -98,7 +138,23 @@ class LoginView: UIView {
             passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 5),
             passwordTextField.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: emailLabel.trailingAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50)
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
+            signInButton.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
+            signInButton.trailingAnchor.constraint(equalTo: emailLabel.trailingAnchor),
+            signInButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            signInLabel.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 30),
+            signInLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            googleImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
+            googleImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
+            
+            xImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
+            xImageView.leadingAnchor.constraint(equalTo: googleImageView.trailingAnchor, constant: 30),
+            xImageView.heightAnchor.constraint(equalToConstant: 35),
+            xImageView.widthAnchor.constraint(equalToConstant: 35),
             
         ])
     }
