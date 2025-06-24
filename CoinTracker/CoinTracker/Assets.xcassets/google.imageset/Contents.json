@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "ios_dark_rd_na@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "web_light_rd_na@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

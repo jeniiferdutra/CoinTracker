@@ -33,7 +33,14 @@ class LoginView: UIView {
         email.font = UIFont.systemFont(ofSize: 14)
         email.keyboardType = .emailAddress
         email.autocorrectionType = .no
-        email.borderStyle = .roundedRect
+        email.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        email.layer.cornerRadius = 15
+        email.clipsToBounds = true
+        email.layer.borderWidth = 0.3
+        email.layer.borderColor = UIColor.lightGray.cgColor
+        email.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
+        email.leftViewMode = .always
+        email.borderStyle = .none
         return email
     }()
     
@@ -52,8 +59,15 @@ class LoginView: UIView {
         password.placeholder = "Enter your password"
         password.textColor = .white
         password.font = UIFont.systemFont(ofSize: 14)
-        password.borderStyle = .roundedRect
+        password.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        password.layer.cornerRadius = 15
+        password.clipsToBounds = true
+        password.layer.borderWidth = 0.3
+        password.layer.borderColor = UIColor.lightGray.cgColor
         password.isSecureTextEntry = true
+        password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
+        password.leftViewMode = .always
+        password.borderStyle = .none
         return password
     }()
     
@@ -65,7 +79,7 @@ class LoginView: UIView {
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         btn.setTitleColor(.black, for: .normal)
         btn.clipsToBounds = true
-        btn.layer.cornerRadius = 8
+        btn.layer.cornerRadius = 15
         //btn.addTarget(self, action: #selector(tappedCloseButton), for: .touchUpInside)
         return btn
     }()
@@ -86,11 +100,37 @@ class LoginView: UIView {
         return img
     }()
     
-    lazy var xImageView: UIImageView = {
+    lazy var facebookImageView: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "x")
+        img.image = UIImage(named: "facebook")
         return img
+    }()
+    
+    lazy var githubImageView: UIImageView = {
+        let img = UIImageView()
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.image = UIImage(named: "github")
+        return img
+    }()
+    
+    lazy var signUpLabel: UILabel = {
+        let signIn = UILabel()
+        signIn.translatesAutoresizingMaskIntoConstraints = false
+        signIn.text = "Don't have an account?"
+        signIn.textColor = .white
+        signIn.font = UIFont.systemFont(ofSize: 14)
+        return signIn
+    }()
+    
+    lazy var signUpButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Register", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        //btn.addTarget(self, action: #selector(), for: .touchUpInside)
+        return btn
     }()
 
     override init(frame: CGRect) {
@@ -112,7 +152,10 @@ class LoginView: UIView {
         addSubview(signInButton)
         addSubview(signInLabel)
         addSubview(googleImageView)
-        addSubview(xImageView)
+        addSubview(facebookImageView)
+        addSubview(githubImageView)
+        addSubview(signUpLabel)
+        addSubview(signUpButton)
     }
     
     private func configConstraints() {
@@ -149,12 +192,25 @@ class LoginView: UIView {
             signInLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             googleImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
-            googleImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
+            googleImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 120),
+            googleImageView.heightAnchor.constraint(equalToConstant: 45),
+            googleImageView.widthAnchor.constraint(equalToConstant: 45),
             
-            xImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
-            xImageView.leadingAnchor.constraint(equalTo: googleImageView.trailingAnchor, constant: 30),
-            xImageView.heightAnchor.constraint(equalToConstant: 35),
-            xImageView.widthAnchor.constraint(equalToConstant: 35),
+            facebookImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
+            facebookImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            facebookImageView.heightAnchor.constraint(equalToConstant: 45),
+            facebookImageView.widthAnchor.constraint(equalToConstant: 45),
+            
+            githubImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
+            githubImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -120),
+            githubImageView.heightAnchor.constraint(equalToConstant: 45),
+            githubImageView.widthAnchor.constraint(equalToConstant: 45),
+            
+            signUpLabel.topAnchor.constraint(equalTo: facebookImageView.bottomAnchor, constant: 80),
+            signUpLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
+            
+            signUpButton.topAnchor.constraint(equalTo: githubImageView.bottomAnchor, constant: 74),
+            signUpButton.leadingAnchor.constraint(equalTo: signUpLabel.trailingAnchor, constant: 5),
             
         ])
     }
