@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D0E4E6992E0A4B7C009A91B1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D0E4E6982E0A4B7C009A91B1 /* FirebaseAuth */; };
+		D0E4E69B2E0A4B7C009A91B1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D0E4E69A2E0A4B7C009A91B1 /* FirebaseCrashlytics */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D0589FE82DE129A100E252EB /* CoinTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E4E6992E0A4B7C009A91B1 /* FirebaseAuth in Frameworks */,
+				D0E4E69B2E0A4B7C009A91B1 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,8 @@
 			);
 			name = CoinTracker;
 			packageProductDependencies = (
+				D0E4E6982E0A4B7C009A91B1 /* FirebaseAuth */,
+				D0E4E69A2E0A4B7C009A91B1 /* FirebaseCrashlytics */,
 			);
 			productName = CoinTracker;
 			productReference = D0589FE82DE129A100E252EB /* CoinTracker.app */;
@@ -107,6 +116,9 @@
 			);
 			mainGroup = D0589FDF2DE129A100E252EB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D0E4E6972E0A4B7C009A91B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D0589FE92DE129A100E252EB /* Products */;
 			projectDirPath = "";
@@ -343,6 +355,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D0E4E6972E0A4B7C009A91B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D0E4E6982E0A4B7C009A91B1 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0E4E6972E0A4B7C009A91B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D0E4E69A2E0A4B7C009A91B1 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0E4E6972E0A4B7C009A91B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D0589FE02DE129A100E252EB /* Project object */;
 }
