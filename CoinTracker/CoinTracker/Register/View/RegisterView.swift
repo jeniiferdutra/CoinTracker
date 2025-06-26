@@ -285,6 +285,7 @@ class RegisterView: UIView {
     }
     
     public func configTextFields(delegate: UITextFieldDelegate) {
+        nameTextField.delegate = delegate
         emailTextField.delegate = delegate
         passwordTextField.delegate = delegate
     }

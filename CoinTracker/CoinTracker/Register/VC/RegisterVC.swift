@@ -36,7 +36,11 @@ class RegisterVC: UIViewController {
 
 extension RegisterVC: RegisterViewProtocol {
     func tappedRegisterButton() {
-        viewModel.registerUser(email: screen?.emailTextField.text ?? "", password: screen?.passwordTextField.text ?? "")
+        viewModel.registerUser(
+            name: screen?.nameTextField.text ?? "",
+            email: screen?.emailTextField.text ?? "",
+            password: screen?.passwordTextField.text ?? ""
+        )
     }
     
     func tappedLoginButton() {

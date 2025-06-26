@@ -9,14 +9,20 @@ import UIKit
 
 class MarketListView: UIView {
     
-    lazy var helpButton: UIButton = {
-        let btn = UIButton()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Help", for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        //btn.addTarget(self, action: #selector(), for: .touchUpInside)
-        return btn
+    lazy var welcomeView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
+        view.applyShadow()
+        return view
+    }()
+    
+    lazy var helloLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 22)
+        return label
     }()
     
     lazy var worthLabel: UILabel = {
@@ -24,7 +30,7 @@ class MarketListView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Total Worth"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 26)
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         label.numberOfLines = 0
         return label
     }()
@@ -34,7 +40,7 @@ class MarketListView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "₿20,25,073"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 26)
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         label.numberOfLines = 0
         return label
     }()
@@ -43,8 +49,8 @@ class MarketListView: UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(red: 51/255, green: 51/255, blue: 66/255, alpha: 1.0)
-        view.clipsToBounds = true
         view.layer.cornerRadius = 15
+        view.applyShadow()
         return view
     }()
     
@@ -89,18 +95,19 @@ class MarketListView: UIView {
         return img
     }()
     
-    lazy var assetsLabel: UILabel = {
+    lazy var popularLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Assets"
+        label.text = "Popular Currencies"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 19)
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
         tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.identifier)
         return tableView
     }()
@@ -122,7 +129,9 @@ class MarketListView: UIView {
     }
     
     private func addSuperView() {
-        addSubview(helpButton)
+        addSubview(welcomeView)
+        welcomeView.addSubview(helloLabel)
+
         addSubview(worthLabel)
         addSubview(valueLabel)
         addSubview(headerCardView)
@@ -132,23 +141,29 @@ class MarketListView: UIView {
         headerCardView.addSubview(exploreButton)
         headerCardView.addSubview(bitcoinImageview)
         
-        addSubview(assetsLabel)
+        addSubview(popularLabel)
         addSubview(tableView)
     }
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            helpButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            helpButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             
-            worthLabel.topAnchor.constraint(equalTo: helpButton.bottomAnchor, constant: 25),
-            worthLabel.leadingAnchor.constraint(equalTo: helpButton.leadingAnchor),
+            welcomeView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            welcomeView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            welcomeView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            welcomeView.heightAnchor.constraint(equalToConstant: 60),
+            
+            helloLabel.topAnchor.constraint(equalTo: welcomeView.topAnchor, constant: 25),
+            helloLabel.leadingAnchor.constraint(equalTo: welcomeView.leadingAnchor, constant: 20),
+            
+            worthLabel.topAnchor.constraint(equalTo: welcomeView.bottomAnchor, constant: 25),
+            worthLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
             
             valueLabel.topAnchor.constraint(equalTo: worthLabel.topAnchor),
             valueLabel.leadingAnchor.constraint(equalTo: worthLabel.trailingAnchor, constant: 120),
             
             headerCardView.topAnchor.constraint(equalTo: worthLabel.bottomAnchor, constant: 25),
-            headerCardView.leadingAnchor.constraint(equalTo: helpButton.leadingAnchor),
+            headerCardView.leadingAnchor.constraint(equalTo: worthLabel.leadingAnchor),
             headerCardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             headerCardView.heightAnchor.constraint(equalToConstant: 200),
             
@@ -169,10 +184,10 @@ class MarketListView: UIView {
             bitcoinImageview.heightAnchor.constraint(equalToConstant: 150),
             bitcoinImageview.widthAnchor.constraint(equalToConstant: 150),
             
-            assetsLabel.topAnchor.constraint(equalTo: headerCardView.bottomAnchor, constant: 25),
-            assetsLabel.leadingAnchor.constraint(equalTo: helpButton.leadingAnchor),
+            popularLabel.topAnchor.constraint(equalTo: headerCardView.bottomAnchor, constant: 25),
+            popularLabel.leadingAnchor.constraint(equalTo: worthLabel.leadingAnchor),
             
-            tableView.topAnchor.constraint(equalTo: assetsLabel.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: popularLabel.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)

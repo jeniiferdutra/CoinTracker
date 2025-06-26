@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MarketListVC: UIViewController {
     
@@ -20,13 +21,28 @@ class MarketListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.fetchRequest()
         viewModel.setDelegate(self)
+        setupHelloLabel()
     }
-
+    
+    private func setupHelloLabel() {
+        guard let user = Auth.auth().currentUser else { return }
+        user.reload { [weak self] error in
+            if let error = error {
+                print("Erro ao recarregar usuário: \(error.localizedDescription)")
+            } else {
+                let updatedName = Auth.auth().currentUser?.displayName ?? "User"
+                DispatchQueue.main.async {
+                    self?.screen?.helloLabel.text = "Hello, \(updatedName)!"
+                }
+            }
+        }
+    }
+    
 }
 
 extension MarketListVC: HomeViewModelProtocol {
@@ -56,9 +72,9 @@ extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 90
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCoin = viewModel.loadCurrentCoins(indexPath: indexPath)
         let coinDetail = CoinDetailVC(coin: selectedCoin)
