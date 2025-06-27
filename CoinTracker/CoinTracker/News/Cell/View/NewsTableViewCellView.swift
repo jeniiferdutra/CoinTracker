@@ -70,6 +70,7 @@ class NewsTableViewCellView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .clear
         addViews()
         configConstraints()
     }

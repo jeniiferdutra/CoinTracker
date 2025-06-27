@@ -12,7 +12,7 @@ class MarketListView: UIView {
     lazy var welcomeView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
+        view.backgroundColor = UIColor(red: 35/255, green: 33/255, blue: 45/255, alpha: 1.0)
         view.applyShadow()
         return view
     }()
@@ -109,6 +109,7 @@ class MarketListView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.identifier)
+        tableView.bounces = false
         return tableView
     }()
     
@@ -148,19 +149,19 @@ class MarketListView: UIView {
     private func configConstraints() {
         NSLayoutConstraint.activate([
             
-            welcomeView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            welcomeView.topAnchor.constraint(equalTo: topAnchor),
             welcomeView.leadingAnchor.constraint(equalTo: leadingAnchor),
             welcomeView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            welcomeView.heightAnchor.constraint(equalToConstant: 60),
+            welcomeView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.12),
             
-            helloLabel.topAnchor.constraint(equalTo: welcomeView.topAnchor, constant: 25),
+            helloLabel.topAnchor.constraint(equalTo: welcomeView.safeAreaLayoutGuide.topAnchor),
             helloLabel.leadingAnchor.constraint(equalTo: welcomeView.leadingAnchor, constant: 20),
             
             worthLabel.topAnchor.constraint(equalTo: welcomeView.bottomAnchor, constant: 25),
-            worthLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            worthLabel.leadingAnchor.constraint(equalTo: helloLabel.leadingAnchor),
             
             valueLabel.topAnchor.constraint(equalTo: worthLabel.topAnchor),
-            valueLabel.leadingAnchor.constraint(equalTo: worthLabel.trailingAnchor, constant: 120),
+            valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
             headerCardView.topAnchor.constraint(equalTo: worthLabel.bottomAnchor, constant: 25),
             headerCardView.leadingAnchor.constraint(equalTo: worthLabel.leadingAnchor),
@@ -187,7 +188,7 @@ class MarketListView: UIView {
             popularLabel.topAnchor.constraint(equalTo: headerCardView.bottomAnchor, constant: 25),
             popularLabel.leadingAnchor.constraint(equalTo: worthLabel.leadingAnchor),
             
-            tableView.topAnchor.constraint(equalTo: popularLabel.bottomAnchor, constant: 20),
+            tableView.topAnchor.constraint(equalTo: popularLabel.bottomAnchor, constant: 25),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)

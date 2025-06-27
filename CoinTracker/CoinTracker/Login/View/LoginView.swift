@@ -138,6 +138,12 @@ class LoginView: UIView {
         return img
     }()
     
+    lazy var signUpContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var signUpLabel: UILabel = {
         let signIn = UILabel()
         signIn.translatesAutoresizingMaskIntoConstraints = false
@@ -163,6 +169,7 @@ class LoginView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
         addViews()
         configConstraints()
     }
@@ -183,8 +190,9 @@ class LoginView: UIView {
         addSubview(googleImageView)
         addSubview(facebookImageView)
         addSubview(githubImageView)
-        addSubview(signUpLabel)
-        addSubview(signUpButton)
+        addSubview(signUpContainerView)
+        signUpContainerView.addSubview(signUpLabel)
+        signUpContainerView.addSubview(signUpButton)
     }
     
     private func configConstraints() {
@@ -238,11 +246,15 @@ class LoginView: UIView {
             githubImageView.heightAnchor.constraint(equalToConstant: 45),
             githubImageView.widthAnchor.constraint(equalToConstant: 45),
             
-            signUpLabel.topAnchor.constraint(equalTo: facebookImageView.bottomAnchor, constant: 80),
-            signUpLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
+            signUpContainerView.topAnchor.constraint(equalTo: facebookImageView.bottomAnchor, constant: 80),
+            signUpContainerView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            signUpButton.topAnchor.constraint(equalTo: githubImageView.bottomAnchor, constant: 74),
+            signUpLabel.topAnchor.constraint(equalTo: signUpContainerView.topAnchor),
+            signUpLabel.leadingAnchor.constraint(equalTo: signUpContainerView.leadingAnchor),
+
+            signUpButton.centerYAnchor.constraint(equalTo: signUpLabel.centerYAnchor),
             signUpButton.leadingAnchor.constraint(equalTo: signUpLabel.trailingAnchor, constant: 5),
+            signUpButton.trailingAnchor.constraint(equalTo: signUpContainerView.trailingAnchor)
             
         ])
     }

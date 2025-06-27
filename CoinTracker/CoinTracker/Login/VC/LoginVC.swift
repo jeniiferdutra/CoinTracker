@@ -21,16 +21,18 @@ class LoginVC: UIViewController {
          navigationController?.navigationBar.isHidden = true
      }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        view.applyCryptoGradientBackground()
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        view.applyCryptoGradientBackground()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         screen?.delegate(delegate: self)
         screen?.configTextFields(delegate: self)
         viewModel.delegate(delegate: self)
+        screen?.emailTextField.text = "test@test.com"
+        screen?.passwordTextField.text = "123456"
     }
 }
 
@@ -67,7 +69,8 @@ extension LoginVC: UITextFieldDelegate {
         
         if !email.isEmpty && !password.isEmpty {
             screen?.signInButton.isEnabled = true
-            screen?.signInButton.backgroundColor = .black
+            screen?.signInButton.backgroundColor = .white
+            screen?.signInButton.setTitleColor(.black, for: .normal)
         } else {
             screen?.signInButton.isEnabled = false
             screen?.signInButton.backgroundColor = .lightGray

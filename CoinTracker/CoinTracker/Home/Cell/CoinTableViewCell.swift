@@ -9,6 +9,7 @@ import UIKit
 
 class CoinTableViewCell: UITableViewCell {
     
+    private var topConstraint: NSLayoutConstraint?
     static let identifier: String = "CoinTableViewCell"
     
     lazy var screen: CoinTableViewCellView = {
@@ -16,7 +17,10 @@ class CoinTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+     
+    public func setTopSpacing(isFirst: Bool) {
+        topConstraint?.constant = isFirst ? 0 : 8
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,8 +39,10 @@ class CoinTableViewCell: UITableViewCell {
     }
     
     private func configConstrains() {
+        topConstraint = screen.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8)
+        
         NSLayoutConstraint.activate([
-            screen.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            topConstraint!,
             screen.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             screen.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             screen.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8)

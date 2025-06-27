@@ -190,6 +190,7 @@ class RegisterView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
         addViews()
         configConstraints()
     }
