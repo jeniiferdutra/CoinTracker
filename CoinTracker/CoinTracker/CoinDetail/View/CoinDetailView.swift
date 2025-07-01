@@ -28,7 +28,7 @@ class CoinDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Coin Tracker"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 26)
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         label.backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
         return label
     }()
@@ -48,6 +48,7 @@ class CoinDetailView: UIView {
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 26)
         label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
@@ -355,7 +356,9 @@ class CoinDetailView: UIView {
             coinImageview.heightAnchor.constraint(equalToConstant: 230),
             
             coinNameLabel.topAnchor.constraint(equalTo: coinImageview.bottomAnchor, constant: 10),
-            coinNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            coinNameLabel.centerXAnchor.constraint(equalTo: coinImageview.centerXAnchor),
+            coinNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            coinNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
             coinSymbolLabel.topAnchor.constraint(equalTo: coinNameLabel.bottomAnchor, constant: 15),
             coinSymbolLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -404,13 +407,13 @@ class CoinDetailView: UIView {
             circulatingSupplyLabel.topAnchor.constraint(equalTo: volumeLabel.bottomAnchor, constant: 30),
             circulatingSupplyLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
             
-            circulatingLabel.topAnchor.constraint(equalTo: circulatingSupplyLabel.bottomAnchor, constant: 10),
+            circulatingLabel.topAnchor.constraint(equalTo: circulatingSupplyLabel.bottomAnchor, constant: 15),
             circulatingLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
             
             changePercentageLabel.topAnchor.constraint(equalTo: circulatingLabel.bottomAnchor, constant: 30),
             changePercentageLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
             
-            athLabel.topAnchor.constraint(equalTo: changePercentageLabel.bottomAnchor, constant: 30),
+            athLabel.topAnchor.constraint(equalTo: changePercentageLabel.bottomAnchor, constant: 15),
             athLabel.leadingAnchor.constraint(equalTo: currentPriceView.leadingAnchor),
             
             athPriceLabel.topAnchor.constraint(equalTo: athLabel.bottomAnchor, constant: 5),

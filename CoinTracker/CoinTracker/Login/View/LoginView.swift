@@ -9,6 +9,9 @@ import UIKit
 
 protocol LoginViewProtocol: AnyObject {
     func tappedLoginButton()
+    func tappedGoogleButton()
+    func tappedFacebookButton()
+    func tappedGithubButton()
     func tappedRegisterButton()
 }
 
@@ -117,25 +120,47 @@ class LoginView: UIView {
         return signIn
     }()
     
-    lazy var googleImageView: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "google")
-        return img
+    lazy var googleButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(named: "google"), for: .normal)
+        btn.addTarget(self, action: #selector(tappedGoogleButton), for: .touchUpInside)
+        return btn
     }()
     
-    lazy var facebookImageView: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "facebook")
-        return img
+    @objc func tappedGoogleButton() {
+        self.delegate?.tappedGoogleButton()
+    }
+    
+    lazy var facebookButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(named: "facebook"), for: .normal)
+        btn.addTarget(self, action: #selector(tappedFacebookButton), for: .touchUpInside)
+        return btn
+    }()
+
+    @objc func tappedFacebookButton() {
+        self.delegate?.tappedFacebookButton()
+    }
+    
+    lazy var githubButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(named: "github"), for: .normal)
+        btn.addTarget(self, action: #selector(tappedGithubButton), for: .touchUpInside)
+        return btn
     }()
     
-    lazy var githubImageView: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "github")
-        return img
+    @objc func tappedGithubButton() {
+        self.delegate?.tappedGithubButton()
+    }
+    
+    lazy var lineView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
     }()
     
     lazy var signUpContainerView: UIView = {
@@ -187,9 +212,10 @@ class LoginView: UIView {
         addSubview(passwordTextField)
         addSubview(signInButton)
         addSubview(signInLabel)
-        addSubview(googleImageView)
-        addSubview(facebookImageView)
-        addSubview(githubImageView)
+        addSubview(googleButton)
+        addSubview(facebookButton)
+        addSubview(githubButton)
+        addSubview(lineView)
         addSubview(signUpContainerView)
         signUpContainerView.addSubview(signUpLabel)
         signUpContainerView.addSubview(signUpButton)
@@ -231,23 +257,30 @@ class LoginView: UIView {
             signInLabel.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 30),
             signInLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            googleImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
-            googleImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 120),
-            googleImageView.heightAnchor.constraint(equalToConstant: 45),
-            googleImageView.widthAnchor.constraint(equalToConstant: 45),
+            googleButton.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
+            googleButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 120),
+            googleButton.heightAnchor.constraint(equalToConstant: 45),
+            googleButton.widthAnchor.constraint(equalToConstant: 45),
             
-            facebookImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
-            facebookImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            facebookImageView.heightAnchor.constraint(equalToConstant: 45),
-            facebookImageView.widthAnchor.constraint(equalToConstant: 45),
+            facebookButton.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
+            facebookButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            facebookButton.heightAnchor.constraint(equalToConstant: 45),
+            facebookButton.widthAnchor.constraint(equalToConstant: 45),
             
-            githubImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
-            githubImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -120),
-            githubImageView.heightAnchor.constraint(equalToConstant: 45),
-            githubImageView.widthAnchor.constraint(equalToConstant: 45),
+            githubButton.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
+            githubButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -120),
+            githubButton.heightAnchor.constraint(equalToConstant: 45),
+            githubButton.widthAnchor.constraint(equalToConstant: 45),
             
-            signUpContainerView.topAnchor.constraint(equalTo: facebookImageView.bottomAnchor, constant: 80),
+            lineView.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 40),
+            lineView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 64),
+            lineView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -64),
+            lineView.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            signUpContainerView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 40),
             signUpContainerView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            signUpContainerView.widthAnchor.constraint(equalToConstant: 220),
+            signUpContainerView.heightAnchor.constraint(equalToConstant: 30),
             
             signUpLabel.topAnchor.constraint(equalTo: signUpContainerView.topAnchor),
             signUpLabel.leadingAnchor.constraint(equalTo: signUpContainerView.leadingAnchor),

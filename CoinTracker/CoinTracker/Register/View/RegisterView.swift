@@ -135,37 +135,20 @@ class RegisterView: UIView {
         self.delegate?.tappedRegisterButton()
     }
     
+    lazy var lineView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    lazy var signInContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var signInLabel: UILabel = {
-        let signIn = UILabel()
-        signIn.translatesAutoresizingMaskIntoConstraints = false
-        signIn.text = "Or register with"
-        signIn.textColor = .white
-        signIn.font = UIFont.systemFont(ofSize: 14)
-        return signIn
-    }()
-    
-    lazy var googleImageView: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "google")
-        return img
-    }()
-    
-    lazy var facebookImageView: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "facebook")
-        return img
-    }()
-    
-    lazy var githubImageView: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "github")
-        return img
-    }()
-    
-    lazy var signUpLabel: UILabel = {
         let signIn = UILabel()
         signIn.translatesAutoresizingMaskIntoConstraints = false
         signIn.text = "Do you have an account?"
@@ -208,13 +191,11 @@ class RegisterView: UIView {
         addSubview(emailTextField)
         addSubview(passwordLabel)
         addSubview(passwordTextField)
-        addSubview(signInButton)
-        addSubview(signInLabel)
-        addSubview(googleImageView)
-        addSubview(facebookImageView)
-        addSubview(githubImageView)
-        addSubview(signUpLabel)
         addSubview(signUpButton)
+        addSubview(lineView)
+        addSubview(signInContainerView)
+        signInContainerView.addSubview(signInLabel)
+        signInContainerView.addSubview(signInButton)
     }
     
     private func configConstraints() {
@@ -257,31 +238,23 @@ class RegisterView: UIView {
             signUpButton.leadingAnchor.constraint(equalTo: registerLabel.leadingAnchor),
             signUpButton.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
             signUpButton.heightAnchor.constraint(equalToConstant: 50),
+
+            lineView.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 40),
+            lineView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 74),
+            lineView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -74),
+            lineView.heightAnchor.constraint(equalToConstant: 0.5),
             
-            signInLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 30),
-            signInLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            signInContainerView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 40),
+            signInContainerView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            signInContainerView.widthAnchor.constraint(equalToConstant: 220),
+            signInContainerView.heightAnchor.constraint(equalToConstant: 30),
             
-            googleImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
-            googleImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 120),
-            googleImageView.heightAnchor.constraint(equalToConstant: 45),
-            googleImageView.widthAnchor.constraint(equalToConstant: 45),
-            
-            facebookImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
-            facebookImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            facebookImageView.heightAnchor.constraint(equalToConstant: 45),
-            facebookImageView.widthAnchor.constraint(equalToConstant: 45),
-            
-            githubImageView.topAnchor.constraint(equalTo: signInLabel.bottomAnchor, constant: 20),
-            githubImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -120),
-            githubImageView.heightAnchor.constraint(equalToConstant: 45),
-            githubImageView.widthAnchor.constraint(equalToConstant: 45),
-            
-            signUpLabel.topAnchor.constraint(equalTo: facebookImageView.bottomAnchor, constant: 50),
-            signUpLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
-            
-            signInButton.topAnchor.constraint(equalTo: githubImageView.bottomAnchor, constant: 45),
-            signInButton.leadingAnchor.constraint(equalTo: signUpLabel.trailingAnchor, constant: 5),
-            
+            signInLabel.topAnchor.constraint(equalTo: signInContainerView.topAnchor),
+            signInLabel.leadingAnchor.constraint(equalTo: signInContainerView.leadingAnchor),
+
+            signInButton.centerYAnchor.constraint(equalTo: signInLabel.centerYAnchor),
+            signInButton.leadingAnchor.constraint(equalTo: signInLabel.trailingAnchor, constant: -3),
+            signInButton.trailingAnchor.constraint(equalTo: signInContainerView.trailingAnchor)
         ])
     }
     

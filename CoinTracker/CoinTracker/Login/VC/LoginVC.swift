@@ -41,13 +41,34 @@ extension LoginVC: LoginViewProtocol {
         viewModel.login(email: screen?.emailTextField.text ?? "", password: screen?.passwordTextField.text ?? "")
     }
     
+    func tappedGoogleButton() {
+        viewModel.loginWithGoogle(presentingViewController: self)
+    }
+    
+    func tappedFacebookButton() {
+        print(#function)
+    }
+    
+    func tappedGithubButton() {
+        viewModel.loginWithGitHub(presentingViewController: self)
+    }
+    
     func tappedRegisterButton() {
+        print("Botão Register clicado!")
         let vc = RegisterVC()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension LoginVC: LoginViewModelProtocol {
+    func sucessGoogleLogin() {
+        sucessLogin()
+    }
+    
+    func errorGoogleLogin(errorMessage: String) {
+        print("Erro login Google: \(errorMessage)")
+    }
+    
     func sucessLogin() {
         let tabBar = TabBarVC()
         if let sceneDelegate = UIApplication.shared.connectedScenes

@@ -21,11 +21,6 @@ class RegisterVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        view.applyCryptoGradientBackground()
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         screen?.delegate(delegate: self)
