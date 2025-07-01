@@ -15,6 +15,7 @@ class CoinTableViewCellView: UIView {
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
         view.backgroundColor = UIColor(red: 51/255, green: 51/255, blue: 66/255, alpha: 1.0)
+        view.applyShadow()
         return view
     }()
     
@@ -79,10 +80,10 @@ class CoinTableViewCellView: UIView {
     private func configConstraints() {
         NSLayoutConstraint.activate([
             
-            view.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            view.topAnchor.constraint(equalTo: topAnchor),
             view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
             
             coinImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             coinImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),

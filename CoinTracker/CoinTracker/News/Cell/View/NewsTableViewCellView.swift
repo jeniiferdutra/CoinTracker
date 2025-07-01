@@ -9,15 +9,6 @@ import UIKit
 
 class NewsTableViewCellView: UIView {
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 19)
-        label.numberOfLines = 0
-        return label
-    }()
-    
     lazy var articleSourceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +50,15 @@ class NewsTableViewCellView: UIView {
         return img
     }()
     
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 19)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -70,6 +70,7 @@ class NewsTableViewCellView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .clear
         addViews()
         configConstraints()
     }
@@ -79,32 +80,28 @@ class NewsTableViewCellView: UIView {
     }
     
     private func addViews() {
-        addSubview(titleLabel)
         addSubview(articleSourceLabel)
         addSubview(sourceLabel)
         addSubview(publishedAtLabel)
         addSubview(imageContainerView)
         imageContainerView.addSubview(thumbnailImageView)
+        addSubview(titleLabel)
         addSubview(descriptionLabel)
     }
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            
-            articleSourceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            articleSourceLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            
-            sourceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            sourceLabel.leadingAnchor.constraint(equalTo: articleSourceLabel.trailingAnchor, constant: 3),
-            
-            publishedAtLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            articleSourceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            articleSourceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+
+            sourceLabel.centerYAnchor.constraint(equalTo: articleSourceLabel.centerYAnchor),
+            sourceLabel.leadingAnchor.constraint(equalTo: articleSourceLabel.trailingAnchor, constant: 5),
+
+            publishedAtLabel.centerYAnchor.constraint(equalTo: articleSourceLabel.centerYAnchor),
             publishedAtLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            imageContainerView.topAnchor.constraint(equalTo: articleSourceLabel.bottomAnchor, constant: 20),
-            imageContainerView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            imageContainerView.topAnchor.constraint(equalTo: articleSourceLabel.bottomAnchor, constant: 10),
+            imageContainerView.leadingAnchor.constraint(equalTo: articleSourceLabel.leadingAnchor),
             imageContainerView.trailingAnchor.constraint(equalTo: publishedAtLabel.trailingAnchor),
             imageContainerView.heightAnchor.constraint(equalToConstant: 200),
             
@@ -112,9 +109,13 @@ class NewsTableViewCellView: UIView {
             thumbnailImageView.leadingAnchor.constraint(equalTo: imageContainerView.leadingAnchor),
             thumbnailImageView.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor),
             thumbnailImageView.bottomAnchor.constraint(equalTo: imageContainerView.bottomAnchor),
+            
+            titleLabel.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 15),
+            titleLabel.leadingAnchor.constraint(equalTo: articleSourceLabel.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: publishedAtLabel.trailingAnchor),
 
-            descriptionLabel.topAnchor.constraint(equalTo: imageContainerView.bottomAnchor, constant: 15),
-            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: articleSourceLabel.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: publishedAtLabel.trailingAnchor),
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30)
         ])
