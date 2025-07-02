@@ -17,18 +17,20 @@ class TabBarVC: UITabBarController {
     private func setupTabBar() {
         let home = UINavigationController(rootViewController: MarketListVC())
         let news = UINavigationController(rootViewController: NewsVC())
+        let profile = UINavigationController(rootViewController: ProfileVC())
         
         home.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         news.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "newspaper"), tag: 1)
+        profile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 2)
         
-        setViewControllers([home, news], animated: false)
+        setViewControllers([home, news, profile], animated: false)
         
         tabBar.isTranslucent = false
         tabBar.tintColor = .white
         
         let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
-        tabBarAppearance.backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
+        tabBarAppearance.backgroundColor = UIColor(red: 35/255, green: 33/255, blue: 45/255, alpha: 1.0)
         tabBar.standardAppearance = tabBarAppearance
         tabBar.scrollEdgeAppearance = tabBarAppearance
         
@@ -36,5 +38,6 @@ class TabBarVC: UITabBarController {
         
         itens[0].image = UIImage(systemName: "homekit")
         itens[1].image = UIImage(systemName: "newspaper")
+        itens[2].image = UIImage(systemName: "person")
     }
 }
