@@ -1,6 +1,6 @@
 # 💰 CoinTracker
 
-Aplicativo iOS desenvolvido com Swift que consome uma API pública de criptomoedas para exibir os preços, variações e informações principais de ativos digitais como Bitcoin, Ethereum, entre outros.
+Aplicativo iOS desenvolvido com Swift que consome APIs públicas de criptomoedas para exibir os preços, variações e informações principais de ativos digitais como Bitcoin, Ethereum, entre outros.
 
 ![Swift](https://img.shields.io/badge/swift-5.0-orange)
 ![iOS](https://img.shields.io/badge/iOS-13%2B-lightgrey)
@@ -11,10 +11,16 @@ Aplicativo iOS desenvolvido com Swift que consome uma API pública de criptomoed
 
 ## 📱 Funcionalidades
 
-- [x] Consumo de API REST
+- [x] Consumo de API REST para criptomoedas
 - [x] Exibição de lista de criptomoedas com nome, símbolo, preço e variação de 24h
-- [ ] Tela de detalhes com mais informações de mercado
-- [ ] Pesquisa por nome ou símbolo
+- [x] Tela de detalhes com mais informações de mercado
+- [x] Consumo de API REST para notícias de criptomoedas com tela dedicada para exibição
+- [x] Abertura de páginas web dentro do app usando SafariServices
+- [x] Autenticação com Firebase:
+  - Email e senha
+  - Login via Google
+  - Login via GitHub
+- [x] Monitoramento de crashes com Firebase Crashlytics
 
 ---
 
@@ -25,6 +31,9 @@ Aplicativo iOS desenvolvido com Swift que consome uma API pública de criptomoed
 - `MVVM`
 - `URLSession` para requisição de API
 - `Codable` para parsing de JSON
+- `Firebase Authentication` (Email, Google, GitHub)
+- `Firebase Crashlytics`
+- `SafariServices` para abertura de páginas web internas
 - `Git` e `GitHub` para versionamento
 
 ---
@@ -33,10 +42,12 @@ Aplicativo iOS desenvolvido com Swift que consome uma API pública de criptomoed
 
 Este projeto tem como objetivo reforçar meus conhecimentos em:
 
-- Consumo de APIs no iOS
+- Consumo de múltiplas APIs no iOS
 - Manipulação e exibição de dados com UITableView
-- Tratamento de erros de rede
-- Separação de responsabilidades com MVVM
+- Tratamento de erros de rede e autenticação de usuários
+- Uso do SafariServices para navegação dentro do app
+- Integração com Firebase para autenticação e crash analytics
+- Separação de responsabilidades com arquitetura MVVM
 - Boas práticas de código e arquitetura
 
 ---
