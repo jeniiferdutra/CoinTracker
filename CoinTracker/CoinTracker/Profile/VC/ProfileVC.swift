@@ -12,10 +12,12 @@ class ProfileVC: UIViewController {
     
     private var screen: ProfileView?
     private let viewModel = ProfileViewModel()
+    private var alert: AlertController?
     
     override func loadView() {
         screen = ProfileView()
         view = screen
+        alert = AlertController(controller: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +46,7 @@ extension ProfileVC: ProfileViewProtocol {
                     }
                 }
             case .failure(let error):
-                print("Erro ao deslogar: \(error.localizedDescription)") // MARK: Adicicionar um alert
+                self.alert?.getAlert(title: "Erro", message: "Não foi possível sair da conta: \(error.localizedDescription)")
             }
         }
     }

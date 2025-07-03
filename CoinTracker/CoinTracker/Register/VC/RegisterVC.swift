@@ -11,10 +11,12 @@ class RegisterVC: UIViewController {
     
     private var screen: RegisterView?
     private var viewModel: RegisterViewModel = RegisterViewModel()
+    private var alert: AlertController?
     
     override func loadView() {
         screen = RegisterView()
         view = screen
+        alert = AlertController(controller: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,6 +28,13 @@ class RegisterVC: UIViewController {
         screen?.delegate(delegate: self)
         screen?.configTextFields(delegate: self)
         viewModel.delegate(delegate: self)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
@@ -53,10 +62,8 @@ extension RegisterVC: RegisterViewModelProtocol {
     }
     
     func errorRegister(errorMessage: String) {
-        print(#function)
+        alert?.getAlert(title: "Erro no Cadastro", message: errorMessage)
     }
-    
-    
 }
 
 extension RegisterVC: UITextFieldDelegate {
@@ -68,15 +75,29 @@ extension RegisterVC: UITextFieldDelegate {
         
         if !name.isEmpty && !email.isEmpty && !password.isEmpty {
             screen?.signUpButton.isEnabled = true
-            screen?.signUpButton.backgroundColor = .black
+            screen?.signUpButton.backgroundColor = .white
+            screen?.signUpButton.setTitleColor(.black, for: .normal)
+            screen?.signUpButton.layer.borderColor = UIColor.clear.cgColor
+            screen?.signUpButton.layer.borderWidth = 0
         } else {
             screen?.signUpButton.isEnabled = false
             screen?.signUpButton.backgroundColor = .lightGray
+            screen?.signUpButton.setTitleColor(.black, for: .disabled)
+            screen?.signUpButton.layer.borderColor = UIColor.red.cgColor
+            screen?.signUpButton.layer.borderWidth = 1.5
+            screen?.signUpButton.layer.cornerRadius = 15
+            screen?.signUpButton.clipsToBounds = true
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return false
+        if textField == screen?.nameTextField {
+            screen?.emailTextField.becomeFirstResponder()
+        } else if textField == screen?.emailTextField {
+            screen?.passwordTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }

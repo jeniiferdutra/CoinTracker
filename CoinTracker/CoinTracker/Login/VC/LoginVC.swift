@@ -11,20 +11,17 @@ class LoginVC: UIViewController {
     
     private var screen: LoginView?
     private var viewModel: LoginViewModel = LoginViewModel()
+    private var alert: AlertController?
     
     override func loadView() {
         screen = LoginView()
         view = screen
+        alert = AlertController(controller: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         navigationController?.navigationBar.isHidden = true
-     }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        view.applyCryptoGradientBackground()
-//    }
+        navigationController?.navigationBar.isHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +30,13 @@ class LoginVC: UIViewController {
         viewModel.delegate(delegate: self)
         screen?.emailTextField.text = "test@test.com"
         screen?.passwordTextField.text = "123456"
+        // adiciona o tap para fechar teclado
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
@@ -46,7 +50,8 @@ extension LoginVC: LoginViewProtocol {
     }
     
     func tappedFacebookButton() {
-        viewModel.loginWithFacebook(from: self)
+        //viewModel.loginWithFacebook(from: self)
+        print(#function)
     }
     
     func tappedGithubButton() {
@@ -78,7 +83,7 @@ extension LoginVC: LoginViewModelProtocol {
     }
     
     func errorLogin(errorMessage: String) {
-        print(#function)
+        alert?.getAlert(title: "Oops!", message: "E-mail ou senha incorretos.")
     }
 }
 
@@ -92,14 +97,25 @@ extension LoginVC: UITextFieldDelegate {
             screen?.signInButton.isEnabled = true
             screen?.signInButton.backgroundColor = .white
             screen?.signInButton.setTitleColor(.black, for: .normal)
+            screen?.signInButton.layer.borderColor = UIColor.clear.cgColor
+            screen?.signInButton.layer.borderWidth = 0
         } else {
             screen?.signInButton.isEnabled = false
             screen?.signInButton.backgroundColor = .lightGray
+            screen?.signInButton.setTitleColor(.black, for: .disabled)
+            screen?.signInButton.layer.borderColor = UIColor.red.cgColor
+            screen?.signInButton.layer.borderWidth = 1.5
+            screen?.signInButton.layer.cornerRadius = 15
+            screen?.signInButton.clipsToBounds = true
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool { // Fechar o teclado ao tocar "return"
-        textField.resignFirstResponder()
-        return false
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == screen?.emailTextField {
+            screen?.passwordTextField.becomeFirstResponder() // vai para o próx campo
+        } else {
+            textField.resignFirstResponder() // fecha o teclado no último campo
+        }
+        return true
     }
 }
