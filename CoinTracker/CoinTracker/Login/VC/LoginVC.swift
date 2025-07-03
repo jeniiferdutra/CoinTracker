@@ -46,7 +46,7 @@ extension LoginVC: LoginViewProtocol {
     }
     
     func tappedFacebookButton() {
-        print(#function)
+        viewModel.loginWithFacebook(from: self)
     }
     
     func tappedGithubButton() {

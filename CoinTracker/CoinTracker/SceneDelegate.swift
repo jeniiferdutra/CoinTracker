@@ -15,9 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        try? Auth.auth().signOut()
-        
+                
         let window = UIWindow(windowScene: windowScene)
         
         if Auth.auth().currentUser != nil {

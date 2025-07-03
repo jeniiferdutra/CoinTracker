@@ -45,9 +45,11 @@ extension RegisterVC: RegisterViewProtocol {
 
 extension RegisterVC: RegisterViewModelProtocol {
     func sucessRegister() {
-        let vc: MarketListVC = MarketListVC()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        let tabBar = TabBarVC()
+        if let sceneDelegate = UIApplication.shared.connectedScenes
+            .first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = tabBar
+        }
     }
     
     func errorRegister(errorMessage: String) {
