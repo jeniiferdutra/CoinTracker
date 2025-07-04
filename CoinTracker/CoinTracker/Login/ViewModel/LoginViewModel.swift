@@ -11,6 +11,8 @@ import FirebaseCore
 import GoogleSignIn
 import GoogleSignInSwift
 import SafariServices
+import FacebookLogin
+
 
 protocol LoginViewModelProtocol: AnyObject {
     func sucessLogin()
@@ -73,6 +75,45 @@ class LoginViewModel: NSObject {
             }
         }
     }
+    
+    func loginWithFacebook(from viewController: UIViewController) {
+        let loginManager = LoginManager()
+        
+        loginManager.logIn(permissions: ["public_profile", "email"], from: viewController) { [weak self] result, error in
+            
+            if let error = error {
+                print("Erro no login do Facebook:", error.localizedDescription)
+                self?.delegate?.errorLogin(errorMessage: error.localizedDescription)
+                return
+            }
+            
+            guard let result = result, !result.isCancelled else {
+                print("Login do Facebook cancelado pelo usuário")
+                self?.delegate?.errorLogin(errorMessage: "Login cancelado.")
+                return
+            }
+            
+            guard let accessToken = AccessToken.current?.tokenString else {
+                print("Token de acesso do Facebook não encontrado")
+                self?.delegate?.errorLogin(errorMessage: "Token inválido.")
+                return
+            }
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken)
+            
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    print("Erro ao autenticar com Firebase:", error.localizedDescription)
+                    self?.delegate?.errorLogin(errorMessage: error.localizedDescription)
+                    return
+                }
+                
+                print("Login com Facebook + Firebase bem-sucedido!")
+                self?.delegate?.sucessLogin()
+            }
+        }
+    }
+    
     
     func loginWithGitHub(presentingViewController: UIViewController) {
         let clientID = "Ov23li6vYGAPMuwyfgl7"
