@@ -28,8 +28,6 @@ class LoginVC: UIViewController {
         screen?.delegate(delegate: self)
         screen?.configTextFields(delegate: self)
         viewModel.delegate(delegate: self)
-        screen?.emailTextField.text = "test@test.com"
-        screen?.passwordTextField.text = "123456"
         // adiciona o tap para fechar teclado
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -50,7 +48,7 @@ extension LoginVC: LoginViewProtocol {
     }
     
     func tappedFacebookButton() {
-        //viewModel.loginWithFacebook(from: self)
+        viewModel.loginWithFacebook(from: self)
         print(#function)
     }
     
@@ -59,7 +57,6 @@ extension LoginVC: LoginViewProtocol {
     }
     
     func tappedRegisterButton() {
-        print("Botão Register clicado!")
         let vc = RegisterVC()
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -2,76 +2,68 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>GIDClientID</key>
-	<string>134658842827-onjtpr2qbc9uj5juv2rjmhpfbp5aqie8.apps.googleusercontent.com</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>fb1254564986014649</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>GoogleSignIn</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.134658842827-onjtpr2qbc9uj5juv2rjmhpfbp5aqie8</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>1254564986014649</string>
-	<key>FacebookDisplayName</key>
-	<string>CoinTracker</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string></string>
-	</array>
-	<key>LSApplicationQueriesScheme</key>
-	<array>
-		<string>fbauth2</string>
-		<string>fb-messenger-share-api
-
-fb-messenger-share-api
-
-fb-messenger-share-api
-
-fb-messenger-share-api
-
-fb-messenger-share-api
-
-fb-messenger-share-api
-
-fb-messenger-share-api
-
-</string>
-		<string>fbapi</string>
-		<string>fbshareextension
-
-</string>
-	</array>
-	<key>FacebookClientToken</key>
-	<string>e22c334e382b3c11d4707a7daeaa3d00</string>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
-		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
-			<array>
-				<dict>
-					<key>UISceneClassName</key>
-					<string></string>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-				</dict>
-			</array>
-		</dict>
-	</dict>
+    <!-- Google Client ID -->
+    <key>GIDClientID</key>
+    <string>134658842827-onjtpr2qbc9uj5juv2rjmhpfbp5aqie8.apps.googleusercontent.com</string>
+    
+    <!-- URL Schemes para Facebook e Google -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <!-- Facebook -->
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb1254564986014649</string>
+            </array>
+        </dict>
+        
+        <!-- Google -->
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.134658842827-onjtpr2qbc9uj5juv2rjmhpfbp5aqie8</string>
+            </array>
+        </dict>
+    </array>
+    
+    <!-- Facebook SDK -->
+    <key>FacebookAppID</key>
+    <string>1254564986014649</string>
+    
+    <key>FacebookDisplayName</key>
+    <string>CoinTracker</string>
+    
+    <key>FacebookClientToken</key>
+    <string>e22c334e382b3c11d4707a7daeaa3d00</string>
+    
+    <!-- Schemes que o app pode consultar para abrir outros apps (ex: Facebook) -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fbauth2</string>
+        <string>fb-messenger-share-api</string>
+        <string>fbshareextension</string>
+    </array>
+    
+    <!-- Configuração para múltiplas cenas (SceneDelegate) -->
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+        <key>UISceneConfigurations</key>
+        <dict>
+            <key>UIWindowSceneSessionRoleApplication</key>
+            <array>
+                <dict>
+                    <key>UISceneClassName</key>
+                    <string></string>
+                    <key>UISceneConfigurationName</key>
+                    <string>Default Configuration</string>
+                    <key>UISceneDelegateClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+                </dict>
+            </array>
+        </dict>
+    </dict>
 </dict>
 </plist>
