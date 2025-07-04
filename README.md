@@ -14,11 +14,13 @@ Aplicativo iOS desenvolvido com Swift que consome APIs públicas de criptomoedas
 - [x] Consumo de API REST para criptomoedas
 - [x] Exibição de lista de criptomoedas com nome, símbolo, preço e variação de 24h
 - [x] Tela de detalhes com mais informações de mercado
+- [x] Tratamento de erros com Alert
 - [x] Consumo de API REST para notícias de criptomoedas com tela dedicada para exibição
 - [x] Abertura de páginas web dentro do app usando SafariServices
 - [x] Autenticação com Firebase:
   - Email e senha
   - Login via Google
+  - Login via Facebook
   - Login via GitHub
 - [x] Monitoramento de crashes com Firebase Crashlytics
 
