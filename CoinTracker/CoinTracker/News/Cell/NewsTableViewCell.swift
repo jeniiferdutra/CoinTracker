@@ -65,7 +65,6 @@ class NewsTableViewCell: UITableViewCell {
 
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .full // "5 days ago", "2 hours ago"
-        // formatter.locale = Locale(identifier: "pt_BR") // Descomente se quiser em português
         return formatter.localizedString(for: date, relativeTo: Date())
     }
 }
