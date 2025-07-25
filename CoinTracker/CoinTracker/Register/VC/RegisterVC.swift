@@ -25,17 +25,12 @@ class RegisterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dismissKeyboard()
         screen?.delegate(delegate: self)
         screen?.configTextFields(delegate: self)
         viewModel.delegate(delegate: self)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
+    }
 
-    }
-    
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
-    }
 }
 
 extension RegisterVC: RegisterViewProtocol {

@@ -25,16 +25,10 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dismissKeyboard()
         screen?.delegate(delegate: self)
         screen?.configTextFields(delegate: self)
         viewModel.delegate(delegate: self)
-        // adiciona o tap para fechar teclado
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
     }
 }
 
@@ -62,6 +56,47 @@ extension LoginVC: LoginViewProtocol {
     }
 }
 
+extension LoginVC: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) { // Saber quando o campo terminou de ser editado
+        
+        if textField.text?.isEmpty ?? false {
+            textField.layer.borderWidth = 1.5
+            textField.layer.borderColor = UIColor.red.cgColor
+        } else {
+            switch textField {
+            case self.screen?.emailTextField:
+                if (screen?.emailTextField.text ?? "").isValid(validType: .email) {
+                    screen?.emailTextField.layer.borderWidth = 1
+                    screen?.emailTextField.layer.borderColor = UIColor.white.cgColor
+                } else {
+                    screen?.emailTextField.layer.borderWidth = 1.5
+                    screen?.emailTextField.layer.borderColor = UIColor.red.cgColor
+                }
+            case self.screen?.passwordTextField:
+                if (screen?.passwordTextField.text ?? "").isValid(validType: .password) {
+                    screen?.passwordTextField.layer.borderWidth = 1
+                    screen?.passwordTextField.layer.borderColor = UIColor.white.cgColor
+                } else {
+                    screen?.passwordTextField.layer.borderWidth = 1.5
+                    screen?.passwordTextField.layer.borderColor = UIColor.red.cgColor
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == screen?.emailTextField {
+            screen?.passwordTextField.becomeFirstResponder() // vai para o próx campo
+        } else {
+            textField.resignFirstResponder() // fecha o teclado no último campo
+        }
+        return true
+    }
+}
+
+
 extension LoginVC: LoginViewModelProtocol {
     func sucessGoogleLogin() {
         sucessLogin()
@@ -81,38 +116,5 @@ extension LoginVC: LoginViewModelProtocol {
     
     func errorLogin(errorMessage: String) {
         alert?.getAlert(title: "Oops!", message: "E-mail ou senha incorretos.")
-    }
-}
-
-extension LoginVC: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) { // Saber quando o campo terminou de ser editado
-        
-        let email: String = screen?.emailTextField.text ?? ""
-        let password: String = screen?.passwordTextField.text ?? ""
-        
-        if !email.isEmpty && !password.isEmpty {
-            screen?.signInButton.isEnabled = true
-            screen?.signInButton.backgroundColor = .white
-            screen?.signInButton.setTitleColor(.black, for: .normal)
-            screen?.signInButton.layer.borderColor = UIColor.clear.cgColor
-            screen?.signInButton.layer.borderWidth = 0
-        } else {
-            screen?.signInButton.isEnabled = false
-            screen?.signInButton.backgroundColor = .lightGray
-            screen?.signInButton.setTitleColor(.black, for: .disabled)
-            screen?.signInButton.layer.borderColor = UIColor.red.cgColor
-            screen?.signInButton.layer.borderWidth = 1.5
-            screen?.signInButton.layer.cornerRadius = 15
-            screen?.signInButton.clipsToBounds = true
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == screen?.emailTextField {
-            screen?.passwordTextField.becomeFirstResponder() // vai para o próx campo
-        } else {
-            textField.resignFirstResponder() // fecha o teclado no último campo
-        }
-        return true
     }
 }
