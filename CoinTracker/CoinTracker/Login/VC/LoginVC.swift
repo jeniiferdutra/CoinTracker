@@ -29,6 +29,27 @@ class LoginVC: UIViewController {
         screen?.delegate(delegate: self)
         screen?.configTextFields(delegate: self)
         viewModel.delegate(delegate: self)
+        isEnabledLoginButton(false)
+    }
+    
+    func validateTextField() {
+        if (screen?.emailTextField.text ?? "").isValid(validType: .email) && (screen?.passwordTextField.text ?? "").isValid(validType: .password) {
+            isEnabledLoginButton(true)
+        } else {
+            isEnabledLoginButton(false)
+        }
+    }
+    
+    func isEnabledLoginButton(_ isEnabled: Bool) {
+        if isEnabled {
+            screen?.signInButton.setTitleColor(.black, for: .normal)
+            screen?.signInButton.isEnabled = true
+            screen?.signInButton.alpha = 1
+        } else {
+            screen?.signInButton.setTitleColor(.black, for: .normal)
+            screen?.signInButton.isEnabled = false
+            screen?.signInButton.alpha = 0.4
+        }
     }
 }
 
@@ -84,6 +105,7 @@ extension LoginVC: UITextFieldDelegate {
                 break
             }
         }
+        validateTextField()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
