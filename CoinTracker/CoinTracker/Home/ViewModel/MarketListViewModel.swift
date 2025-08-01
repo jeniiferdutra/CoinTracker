@@ -22,21 +22,39 @@ class MarketListViewModel {
         self.delegate = delegate
     }
     
-    public func fetchRequest() {
-        service.fetchCoins { [weak self] result in
-            switch result {
-            case .success(let success):
-                self?.coins = success
-                self?.delegate?.success()
-            case .failure(let failure):
-                print(failure)
-                self?.delegate?.error(message: failure.localizedDescription)
+    public func fetchRequest(_ typeFetch: TypeFetch) {
+        
+        switch typeFetch {
+        case .mock:
+            service.loadCoinsFromLocalJSON { result, failure in
+                if let result {
+                    self.coins = result
+                    self.delegate?.success()
+                } else {
+                    self.delegate?.error(message: failure?.localizedDescription ?? "Erro desconhecido")
+                }
+            }
+        case .request:
+            service.fetchCoins { [weak self] result in
+                switch result {
+                case .success(let success):
+                    self?.coins = success
+                    self?.delegate?.success()
+                case .failure(let failure):
+                    print(failure)
+                    self?.delegate?.error(message: failure.localizedDescription)
+                }
             }
         }
+        
     }
     
     public var numberOfRowsInSection: Int {
         return coins.count
+    }
+    
+    public func heightForRowAt() -> CGFloat {
+        return 85
     }
     
     public func loadCurrentCoins(indexPath: IndexPath) -> CoinElement {

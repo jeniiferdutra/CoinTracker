@@ -16,25 +16,11 @@ enum ErrorDetail: Error {
 }
 
 protocol CoinServiceDelegate: GenericService {
-    func loadCoinsFromLocalJSON(completion: @escaping completion<CoinElement?>)
+    func fetchCoins(completion: @escaping (Result<[CoinElement], Error>) -> Void)
+    func loadCoinsFromLocalJSON(completion: @escaping completion<[CoinElement]?>)
 }
 
 class CoinService: CoinServiceDelegate {
-    
-    func loadCoinsFromLocalJSON(completion: @escaping completion<CoinElement?>) {
-        if let url = Bundle.main.url(forResource: "CoinData", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let coinElement: CoinElement = try JSONDecoder().decode(CoinElement.self, from: data)
-                completion(coinElement, nil)
-            } catch {
-                completion(nil, FileError.fileDecodingFailed(name: "CoinData", error))
-            }
-        } else {
-            completion(nil, FileError.fileNotFound(name: "CoinData"))
-        }
-    }
-    
     
     func fetchCoins(completion: @escaping (Result<[CoinElement], Error>) -> Void) {
         let urlString = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
@@ -73,4 +59,17 @@ class CoinService: CoinServiceDelegate {
         task.resume()
     }
     
+    func loadCoinsFromLocalJSON(completion: @escaping completion<[CoinElement]?>) {
+        if let url = Bundle.main.url(forResource: "CoinData", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let coinList: [CoinElement] = try JSONDecoder().decode([CoinElement].self, from: data)
+                completion(coinList, nil)
+            } catch {
+                completion(nil, FileError.fileDecodingFailed(name: "CoinData", error))
+            }
+        } else {
+            completion(nil, FileError.fileNotFound(name: "CoinData"))
+        }
+    }
 }

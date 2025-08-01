@@ -12,6 +12,11 @@ enum FileError: Swift.Error {
     case fileDecodingFailed(name: String, Swift.Error)
 }
 
+enum TypeFetch {
+    case mock
+    case request
+}
+
 protocol GenericService: AnyObject {
     typealias completion <T> = (_ result: T, _ failure: Error?) -> Void
 }

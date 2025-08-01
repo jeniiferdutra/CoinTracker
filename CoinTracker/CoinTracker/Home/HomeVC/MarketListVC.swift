@@ -19,13 +19,14 @@ class MarketListVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchRequest()
         viewModel.setDelegate(self)
+        viewModel.fetchRequest(.mock)
         setupHelloLabel()
     }
     
@@ -54,7 +55,9 @@ extension MarketListVC: HomeViewModelProtocol {
     }
     
     func error(message: String) {
-        print("Erro")
+        let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
 }
@@ -73,7 +76,7 @@ extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return viewModel.heightForRowAt()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
