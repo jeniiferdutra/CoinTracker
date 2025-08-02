@@ -17,10 +17,6 @@ class CoinTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-     
-    public func setTopSpacing(isFirst: Bool) {
-        topConstraint?.constant = isFirst ? 0 : 8
-    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,11 +34,9 @@ class CoinTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configConstrains() {
-        topConstraint = screen.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8)
-        
+    private func configConstrains() {        
         NSLayoutConstraint.activate([
-            topConstraint!,
+            screen.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             screen.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             screen.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             screen.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8)

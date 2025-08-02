@@ -25,10 +25,35 @@ class RegisterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate(delegate: self)
         dismissKeyboard()
         screen?.delegate(delegate: self)
         screen?.configTextFields(delegate: self)
-        viewModel.delegate(delegate: self)
+        isEnabledRegisterButton(false)
+    }
+    
+    func validateTextField() {
+        let name = screen?.nameTextField.text ?? ""
+        let email = screen?.emailTextField.text ?? ""
+        let password = screen?.passwordTextField.text ?? ""
+        
+        let isValid = name.isValid(validType: .name) &&
+                      email.isValid(validType: .email) &&
+                      password.isValid(validType: .password)
+        
+        isEnabledRegisterButton(isValid)
+    }
+    
+    func isEnabledRegisterButton(_ isEnabled: Bool) {
+        if isEnabled {
+            screen?.signUpButton.setTitleColor(.black, for: .normal)
+            screen?.signUpButton.isEnabled = true
+            screen?.signUpButton.alpha = 1
+        } else {
+            screen?.signUpButton.setTitleColor(.black, for: .normal)
+            screen?.signUpButton.isEnabled = false
+            screen?.signUpButton.alpha = 0.4
+        }
     }
 
 }
@@ -64,27 +89,42 @@ extension RegisterVC: RegisterViewModelProtocol {
 extension RegisterVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        let name: String = screen?.nameTextField.text ?? ""
-        let email: String = screen?.emailTextField.text ?? ""
-        let password: String = screen?.passwordTextField.text ?? ""
-        
-        if !name.isEmpty && !email.isEmpty && !password.isEmpty {
-            screen?.signUpButton.isEnabled = true
-            screen?.signUpButton.backgroundColor = .white
-            screen?.signUpButton.setTitleColor(.black, for: .normal)
-            screen?.signUpButton.layer.borderColor = UIColor.clear.cgColor
-            screen?.signUpButton.layer.borderWidth = 0
+        if textField.text?.isEmpty ?? false {
+            textField.layer.borderWidth = 1.5
+            textField.layer.borderColor = UIColor.red.cgColor
         } else {
-            screen?.signUpButton.isEnabled = false
-            screen?.signUpButton.backgroundColor = .lightGray
-            screen?.signUpButton.setTitleColor(.black, for: .disabled)
-            screen?.signUpButton.layer.borderColor = UIColor.red.cgColor
-            screen?.signUpButton.layer.borderWidth = 1.5
-            screen?.signUpButton.layer.cornerRadius = 15
-            screen?.signUpButton.clipsToBounds = true
+            switch textField {
+            case self.screen?.nameTextField:
+                if (screen?.nameTextField.text ?? "").isValid(validType: .name) {
+                    screen?.nameTextField.layer.borderWidth = 1
+                    screen?.nameTextField.layer.borderColor = UIColor.white.cgColor
+                } else {
+                    screen?.nameTextField.layer.borderWidth = 1.5
+                    screen?.nameTextField.layer.borderColor = UIColor.red.cgColor
+                }
+            case self.screen?.emailTextField:
+                if (screen?.emailTextField.text ?? "").isValid(validType: .email) {
+                    screen?.emailTextField.layer.borderWidth = 1
+                    screen?.emailTextField.layer.borderColor = UIColor.white.cgColor
+                } else {
+                    screen?.emailTextField.layer.borderWidth = 1.5
+                    screen?.emailTextField.layer.borderColor = UIColor.red.cgColor
+                }
+            case self.screen?.passwordTextField:
+                if (screen?.passwordTextField.text ?? "").isValid(validType: .password) {
+                    screen?.passwordTextField.layer.borderWidth = 1
+                    screen?.passwordTextField.layer.borderColor = UIColor.white.cgColor
+                } else {
+                    screen?.passwordTextField.layer.borderWidth = 1.5
+                    screen?.passwordTextField.layer.borderColor = UIColor.red.cgColor
+                }
+            default:
+                break
+            }
         }
+        validateTextField()
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == screen?.nameTextField {
             screen?.emailTextField.becomeFirstResponder()

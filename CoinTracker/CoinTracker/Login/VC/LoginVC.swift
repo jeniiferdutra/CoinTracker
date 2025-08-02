@@ -25,10 +25,10 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate(delegate: self)
         dismissKeyboard()
         screen?.delegate(delegate: self)
         screen?.configTextFields(delegate: self)
-        viewModel.delegate(delegate: self)
         isEnabledLoginButton(false)
     }
     

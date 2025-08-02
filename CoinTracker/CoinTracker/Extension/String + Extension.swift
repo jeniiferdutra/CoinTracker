@@ -8,6 +8,7 @@
 public enum ValidType {
     case email
     case password
+    case name
 }
 
 import Foundation
@@ -15,6 +16,7 @@ import Foundation
 extension String {
     
     enum Regex: String {
+        case name = "^[A-Za-zÀ-ú ]{2,}$"
         case email = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         case password = ".{6,}"
     }
@@ -24,6 +26,8 @@ extension String {
         var regex = ""
         
         switch validType {
+        case .name:
+            regex = Regex.name.rawValue
         case .email:
             regex = Regex.email.rawValue
         case .password:

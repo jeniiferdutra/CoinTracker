@@ -48,7 +48,7 @@ class RegisterView: UIView {
     lazy var nameTextField: UITextField = {
         let email = UITextField()
         email.translatesAutoresizingMaskIntoConstraints = false
-        email.placeholder = "Register your name"
+        email.placeholder = "Register your first name"
         email.textColor = .white
         email.font = UIFont.systemFont(ofSize: 14)
         email.autocorrectionType = .no
