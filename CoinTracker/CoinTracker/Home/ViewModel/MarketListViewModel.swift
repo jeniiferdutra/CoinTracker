@@ -35,14 +35,14 @@ class MarketListViewModel {
                 }
             }
         case .request:
-            service.fetchCoins { [weak self] result in
+            service.fetchCoins { result in
                 switch result {
                 case .success(let success):
-                    self?.coins = success
-                    self?.delegate?.success()
+                    self.coins = success
+                    self.delegate?.success()
                 case .failure(let failure):
-                    print(failure)
-                    self?.delegate?.error(message: failure.localizedDescription)
+                    print(failure.errorDescription ?? "")
+                    self.delegate?.error(message: failure.localizedDescription)
                 }
             }
         }
@@ -65,7 +65,8 @@ class MarketListViewModel {
 //    }
     
     public func loadCurrentCoins(indexPath: IndexPath) -> CoinElement {
-        return coins[indexPath.row]
+        let adjustedIndex = indexPath.row - 2
+        return coins[adjustedIndex]
     }
 }
 

@@ -15,8 +15,8 @@ class TabBarVC: UITabBarController {
     }
     
     private func setupTabBar() {
-        let home = UINavigationController(rootViewController: MarketListVC())
-        let news = UINavigationController(rootViewController: NewsVC())
+        let home = UINavigationController(rootViewController: MarketListViewController())
+        let news = UINavigationController(rootViewController: NewsViewController())
         let profile = UINavigationController(rootViewController: ProfileVC())
         
         home.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)

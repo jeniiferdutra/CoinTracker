@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices // utilizado p/ abrir páginas da web dentro do app com o Safari nativo (SFSafariViewController)
 
-class NewsVC: UIViewController {
+class NewsViewController: UIViewController {
     
     private var screen: NewsView?
     private var viewModel: NewsViewModel = NewsViewModel()
@@ -31,7 +31,7 @@ class NewsVC: UIViewController {
     }
 }
 
-extension NewsVC: NewsViewModelProtocol {
+extension NewsViewController: NewsViewModelProtocol {
     func success() {
         DispatchQueue.main.async {
             self.screen?.configTableViewProtocol(delegate: self, dataSource: self)
@@ -44,7 +44,7 @@ extension NewsVC: NewsViewModelProtocol {
     }
 }
 
-extension NewsVC: UITableViewDelegate, UITableViewDataSource {
+extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection
     }

@@ -9,11 +9,11 @@ import Foundation
 
 class NewsService {
     
-    func fetchNews(completion: @escaping (Result<[Article], Error>) -> Void) {
+    func fetchNews(completion: @escaping (Result<[Article], NetworkError>) -> Void) {
         let urlString = "https://gnews.io/api/v4/search?q=crypto%20OR%20bitcoin%20OR%20ethereum&lang=en&token=4f1e504fe20e366ca53d802579cf4157"
         
         guard let url = URL(string: urlString) else {
-            completion(.failure(ErrorDetail.errorURL(urlString: urlString)))
+            completion(.failure(.invalidURL(url: urlString)))
             return
         }
         
@@ -21,17 +21,17 @@ class NewsService {
             data, response, error in
             
             if let error {
-                completion(.failure(error))
+                completion(.failure(.networkFailure(error)))
                 return
             }
             
             guard let data else {
-                completion(.failure(ErrorDetail.detailError(detail: "Data is nil")))
+                completion(.failure(.noData))
                 return
             }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completion(.failure(ErrorDetail.invalidResponse))
+                completion(.failure(.invalidResponse))
                 return
             }
             
@@ -44,7 +44,7 @@ class NewsService {
                 completion(.success(articles))
             } catch  {
                 print("Error -> \(#function) : \(error.localizedDescription)")
-                completion(.failure(error))
+                completion(.failure(.decodingError(error)))
             }
         }
         task.resume()

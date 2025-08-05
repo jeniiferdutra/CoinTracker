@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class MarketListVC: UIViewController {
+class MarketListViewController: UIViewController {
     
     private var screen: MarketListView?
     private var viewModel: MarketListViewModel = MarketListViewModel()
@@ -46,23 +46,21 @@ class MarketListVC: UIViewController {
     
 }
 
-extension MarketListVC: HomeViewModelProtocol {
+extension MarketListViewController: HomeViewModelProtocol {
     func success() {
-        DispatchQueue.main.async {
-            self.screen?.configTableViewProtocol(delegate: self, dataSource: self)
-            self.screen?.tableView.reloadData()
-        }
+        screen?.configTableViewProtocol(delegate: self, dataSource: self)
+        screen?.tableView.reloadData()
     }
     
     func error(message: String) {
-        let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: "Oops! We had a problem", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
         present(alert, animated: true)
     }
     
 }
 
-extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
+extension MarketListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection + 2
@@ -90,7 +88,7 @@ extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return 70
         default:
-            return 85 
+            return 85
         }
     }
     
@@ -100,6 +98,6 @@ extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
         let coinDetail = CoinDetailVC(coin: selectedCoin)
         present(coinDetail, animated: true)
     }
-
+    
 }
 
