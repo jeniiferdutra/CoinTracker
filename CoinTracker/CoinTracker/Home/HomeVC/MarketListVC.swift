@@ -65,22 +65,41 @@ extension MarketListVC: HomeViewModelProtocol {
 extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsInSection
+        return viewModel.numberOfRowsInSection + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell
-        cell?.setupHomeCell(data: viewModel.loadCurrentCoins(indexPath: indexPath))
-        return cell ?? UITableViewCell()
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier, for: indexPath) as? HeaderTableViewCell
+            return cell ?? UITableViewCell()
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SectionLabelTableViewCell.identifier, for: indexPath) as? SectionLabelTableViewCell
+            return cell ?? UITableViewCell()
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell
+            cell?.setupHomeCell(data: viewModel.loadCurrentCoins(indexPath: indexPath))
+            return cell ?? UITableViewCell()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return viewModel.heightForRowAt()
+        switch indexPath.row {
+        case 0:
+            return 200
+        case 1:
+            return 70
+        default:
+            return 85 
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row >= 2 else { return }
         let selectedCoin = viewModel.loadCurrentCoins(indexPath: indexPath)
         let coinDetail = CoinDetailVC(coin: selectedCoin)
         present(coinDetail, animated: true)
     }
+
 }
+

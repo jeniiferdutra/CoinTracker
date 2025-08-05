@@ -9,7 +9,6 @@ import UIKit
 
 class CoinTableViewCell: UITableViewCell {
     
-    private var topConstraint: NSLayoutConstraint?
     static let identifier: String = String(describing: CoinTableViewCell.self)
     
     private lazy var screen: CoinTableViewCellView = {

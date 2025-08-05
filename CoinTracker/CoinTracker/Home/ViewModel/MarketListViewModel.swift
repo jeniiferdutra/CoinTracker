@@ -53,9 +53,16 @@ class MarketListViewModel {
         return coins.count
     }
     
-    public func heightForRowAt() -> CGFloat {
-        return 85
-    }
+//    public func heightForRowAt() -> CGFloat {
+//        switch indexPath.row {
+//            case 0:
+//                return 200 // altura do header
+//            case 1:
+//                return 70  // altura do título "Coins"
+//            default:
+//                return 85  // altura da célula de moeda
+//            }
+//    }
     
     public func loadCurrentCoins(indexPath: IndexPath) -> CoinElement {
         return coins[indexPath.row]
