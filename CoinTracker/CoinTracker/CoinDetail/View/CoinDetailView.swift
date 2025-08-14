@@ -38,7 +38,7 @@ class CoinDetailView: UIView {
         img.translatesAutoresizingMaskIntoConstraints = false
         img.contentMode = .scaleAspectFill
         img.clipsToBounds = true
-        img.backgroundColor = UIColor(red: 51/255, green: 51/255, blue: 66/255, alpha: 1.0)
+        img.backgroundColor = UIColor.cellBackgroundColor
         return img
     }()
     
@@ -65,7 +65,7 @@ class CoinDetailView: UIView {
     lazy var currentPriceView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 51/255, green: 51/255, blue: 66/255, alpha: 1.0)
+        view.backgroundColor = UIColor.cellBackgroundColor
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
         return view
@@ -87,9 +87,7 @@ class CoinDetailView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
-    
-    //MARK: - 3. Resumo de Preço em 24h
-    
+        
     lazy var priceSummaryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -133,7 +131,7 @@ class CoinDetailView: UIView {
         return label
     }()
     
-    //MARK: - 4. Capitalização de Mercado e Volume
+    //MARK: - 3. Capitalização de Mercado e Volume
     
     lazy var titleMarketCapLabel: UILabel = {
         let label = UILabel()
@@ -178,7 +176,7 @@ class CoinDetailView: UIView {
         return label
     }()
     
-    //MARK: - 5. Fornecimento circulante
+    //MARK: - 4. Fornecimento circulante
     
     lazy var circulatingSupplyLabel: UILabel = {
         let label = UILabel()
@@ -197,7 +195,7 @@ class CoinDetailView: UIView {
         return label
     }()
     
-    // MARK: - 6. Máximas e mínimas históricas
+    // MARK: - 5. Máximas e mínimas históricas
     
     lazy var changePercentageLabel: UILabel = {
         let label = UILabel()
@@ -242,7 +240,7 @@ class CoinDetailView: UIView {
         return label
     }()
     
-    //MARK: - 7. ROI (Retorno sobre o Investimento)
+    //MARK: - 6. ROI (Retorno sobre o Investimento)
     
     lazy var returnOnInvestmentLabel: UILabel = {
         let label = UILabel()
@@ -289,7 +287,7 @@ class CoinDetailView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
+        backgroundColor = UIColor.mainBackgroundColor
         addViews()
         configConstraints()
     }

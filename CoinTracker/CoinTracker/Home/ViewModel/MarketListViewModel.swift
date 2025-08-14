@@ -22,25 +22,51 @@ class MarketListViewModel {
         self.delegate = delegate
     }
     
-    public func fetchRequest() {
-        service.fetchCoins { [weak self] result in
-            switch result {
-            case .success(let success):
-                self?.coins = success
-                self?.delegate?.success()
-            case .failure(let failure):
-                print(failure)
-                self?.delegate?.error(message: failure.localizedDescription)
+    public func fetchRequest(_ typeFetch: TypeFetch) {
+        
+        switch typeFetch {
+        case .mock:
+            service.loadCoinsFromLocalJSON { result, failure in
+                if let result {
+                    self.coins = result
+                    self.delegate?.success()
+                } else {
+                    self.delegate?.error(message: failure?.localizedDescription ?? "Erro desconhecido")
+                }
+            }
+        case .request:
+            service.fetchCoins { result in
+                switch result {
+                case .success(let success):
+                    self.coins = success
+                    self.delegate?.success()
+                case .failure(let failure):
+                    print(failure.errorDescription ?? "")
+                    self.delegate?.error(message: failure.localizedDescription)
+                }
             }
         }
+        
     }
     
     public var numberOfRowsInSection: Int {
         return coins.count
     }
     
+//    public func heightForRowAt() -> CGFloat {
+//        switch indexPath.row {
+//            case 0:
+//                return 200 // altura do header
+//            case 1:
+//                return 70  // altura do título "Coins"
+//            default:
+//                return 85  // altura da célula de moeda
+//            }
+//    }
+    
     public func loadCurrentCoins(indexPath: IndexPath) -> CoinElement {
-        return coins[indexPath.row]
+        let adjustedIndex = indexPath.row - 2
+        return coins[adjustedIndex]
     }
 }
 

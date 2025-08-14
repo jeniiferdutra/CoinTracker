@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class MarketListVC: UIViewController {
+class MarketListViewController: UIViewController {
     
     private var screen: MarketListView?
     private var viewModel: MarketListViewModel = MarketListViewModel()
@@ -19,13 +19,14 @@ class MarketListVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchRequest()
         viewModel.setDelegate(self)
+        viewModel.fetchRequest(.mock)
         setupHelloLabel()
     }
     
@@ -45,40 +46,58 @@ class MarketListVC: UIViewController {
     
 }
 
-extension MarketListVC: HomeViewModelProtocol {
+extension MarketListViewController: HomeViewModelProtocol {
     func success() {
-        DispatchQueue.main.async {
-            self.screen?.configTableViewProtocol(delegate: self, dataSource: self)
-            self.screen?.tableView.reloadData()
-        }
+        screen?.configTableViewProtocol(delegate: self, dataSource: self)
+        screen?.tableView.reloadData()
     }
     
     func error(message: String) {
-        print("Erro")
+        let alert = UIAlertController(title: "Oops! We had a problem", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        present(alert, animated: true)
     }
     
 }
 
-extension MarketListVC: UITableViewDelegate, UITableViewDataSource {
+extension MarketListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsInSection
+        return viewModel.numberOfRowsInSection + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell
-        cell?.setupHomeCell(data: viewModel.loadCurrentCoins(indexPath: indexPath))
-        cell?.setTopSpacing(isFirst: indexPath.row == 0)
-        return cell ?? UITableViewCell()
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier, for: indexPath) as? HeaderTableViewCell
+            return cell ?? UITableViewCell()
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SectionLabelTableViewCell.identifier, for: indexPath) as? SectionLabelTableViewCell
+            return cell ?? UITableViewCell()
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell
+            cell?.setupHomeCell(data: viewModel.loadCurrentCoins(indexPath: indexPath))
+            return cell ?? UITableViewCell()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        switch indexPath.row {
+        case 0:
+            return 200
+        case 1:
+            return 65
+        default:
+            return 85
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row >= 2 else { return }
         let selectedCoin = viewModel.loadCurrentCoins(indexPath: indexPath)
         let coinDetail = CoinDetailVC(coin: selectedCoin)
         present(coinDetail, animated: true)
     }
+    
 }
+

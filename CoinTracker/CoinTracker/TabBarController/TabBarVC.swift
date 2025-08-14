@@ -15,8 +15,8 @@ class TabBarVC: UITabBarController {
     }
     
     private func setupTabBar() {
-        let home = UINavigationController(rootViewController: MarketListVC())
-        let news = UINavigationController(rootViewController: NewsVC())
+        let home = UINavigationController(rootViewController: MarketListViewController())
+        let news = UINavigationController(rootViewController: NewsViewController())
         let profile = UINavigationController(rootViewController: ProfileVC())
         
         home.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
@@ -30,7 +30,7 @@ class TabBarVC: UITabBarController {
         
         let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
-        tabBarAppearance.backgroundColor = UIColor(red: 35/255, green: 33/255, blue: 45/255, alpha: 1.0)
+        tabBarAppearance.backgroundColor = UIColor.topBackgroundColor
         tabBar.standardAppearance = tabBarAppearance
         tabBar.scrollEdgeAppearance = tabBarAppearance
         

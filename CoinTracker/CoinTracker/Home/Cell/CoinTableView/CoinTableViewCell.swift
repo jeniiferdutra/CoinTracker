@@ -9,23 +9,18 @@ import UIKit
 
 class CoinTableViewCell: UITableViewCell {
     
-    private var topConstraint: NSLayoutConstraint?
-    static let identifier: String = "CoinTableViewCell"
+    static let identifier: String = String(describing: CoinTableViewCell.self)
     
-    lazy var screen: CoinTableViewCellView = {
+    private lazy var screen: CoinTableViewCellView = {
         let view = CoinTableViewCellView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-     
-    public func setTopSpacing(isFirst: Bool) {
-        topConstraint?.constant = isFirst ? 0 : 8
-    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
+        backgroundColor = UIColor.mainBackgroundColor
         addViews()
         configConstrains()
     }
@@ -38,11 +33,9 @@ class CoinTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configConstrains() {
-        topConstraint = screen.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8)
-        
+    private func configConstrains() {        
         NSLayoutConstraint.activate([
-            topConstraint!,
+            screen.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             screen.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             screen.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             screen.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8)

@@ -11,7 +11,7 @@ class NewsTableViewCell: UITableViewCell {
     
     static let identifier: String = String(describing: NewsTableViewCell.self)
     
-    lazy var screen: NewsTableViewCellView = {
+    private lazy var screen: NewsTableViewCellView = {
         let view = NewsTableViewCellView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
