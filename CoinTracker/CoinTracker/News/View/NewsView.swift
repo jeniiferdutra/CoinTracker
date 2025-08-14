@@ -12,7 +12,7 @@ class NewsView: UIView {
     lazy var newsContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 35/255, green: 33/255, blue: 45/255, alpha: 1.0)
+        view.backgroundColor = UIColor.topBackgroundColor
         view.applyShadow()
         return view
     }()
@@ -38,7 +38,7 @@ class NewsView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
+        backgroundColor = UIColor.mainBackgroundColor
         addViews()
         configConstraints()
     }

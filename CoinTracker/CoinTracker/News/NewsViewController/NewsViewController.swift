@@ -19,12 +19,13 @@ class NewsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchRequest()
+        viewModel.fetchRequest(.request)
         viewModel.setDelegate(delegate: self)
         screen?.tableView.estimatedRowHeight = 420
         screen?.tableView.rowHeight = UITableView.automaticDimension
@@ -33,14 +34,14 @@ class NewsViewController: UIViewController {
 
 extension NewsViewController: NewsViewModelProtocol {
     func success() {
-        DispatchQueue.main.async {
-            self.screen?.configTableViewProtocol(delegate: self, dataSource: self)
-            self.screen?.tableView.reloadData()
-        }
+        screen?.configTableViewProtocol(delegate: self, dataSource: self)
+        screen?.tableView.reloadData()
     }
     
     func error(message: String) {
-        print(#function)
+        let alert = UIAlertController(title: "Oops! We had a problem", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        present(alert, animated: true)
     }
 }
 

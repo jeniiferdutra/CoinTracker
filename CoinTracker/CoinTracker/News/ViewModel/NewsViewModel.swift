@@ -21,16 +21,28 @@ class NewsViewModel {
     func setDelegate(delegate: NewsViewModelProtocol?) {
         self.delegate = delegate
     }
-
-    public func fetchRequest() {
-        service.fetchNews { [weak self] result in
-            switch result {
-            case .success(let success):
-                self?.articles = success
-                self?.delegate?.success()
-            case .failure(let failure):
-                print(failure)
-                self?.delegate?.error(message: failure.localizedDescription)
+    
+    public func fetchRequest(_ typeFetch: TypeFetch) {
+        switch typeFetch {
+        case .mock:
+            service.loadNewsFromLocalJSON { result, failure in
+                if let result {
+                    self.articles = result
+                    self.delegate?.success()
+                } else {
+                    self.delegate?.error(message: failure?.localizedDescription ?? "Erro desconhecido")
+                }
+            }
+        case .request:
+            service.fetchNews { result in
+                switch result {
+                case .success(let success):
+                    self.articles = success
+                    self.delegate?.success()
+                case .failure(let failure):
+                    print(failure)
+                    self.delegate?.error(message: failure.localizedDescription)
+                }
             }
         }
     }
@@ -43,3 +55,4 @@ class NewsViewModel {
         return articles[indexPath.row]
     }
 }
+

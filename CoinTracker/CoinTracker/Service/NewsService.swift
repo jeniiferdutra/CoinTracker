@@ -7,46 +7,36 @@
 
 import Foundation
 
-class NewsService {
+protocol NewsServiceDelegate: GenericService {
+    func fetchNews(completion: @escaping (Result<[Article], NetworkError>) -> Void)
+    func loadNewsFromLocalJSON(completion: @escaping completion<[Article]?>)
+}
+
+class NewsService: NewsServiceDelegate {
     
     func fetchNews(completion: @escaping (Result<[Article], NetworkError>) -> Void) {
         let urlString = "https://gnews.io/api/v4/search?q=crypto%20OR%20bitcoin%20OR%20ethereum&lang=en&token=4f1e504fe20e366ca53d802579cf4157"
-        
-        guard let url = URL(string: urlString) else {
-            completion(.failure(.invalidURL(url: urlString)))
-            return
+        ServiceManager.shared.request(with: urlString, method: .get, decodeType: NewsFeed.self) { result in
+            switch result {
+            case .success(let feed):
+                completion(.success(feed.articles ?? []))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
-        
-        let task = URLSession.shared.dataTask(with: url) {
-            data, response, error in
-            
-            if let error {
-                completion(.failure(.networkFailure(error)))
-                return
-            }
-            
-            guard let data else {
-                completion(.failure(.noData))
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            
+    }
+    
+    func loadNewsFromLocalJSON(completion: @escaping completion<[Article]?>) {
+        if let url = Bundle.main.url(forResource: "NewsData", withExtension: "json") {
             do {
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601
-                let newsFeed = try decoder.decode(NewsFeed.self, from: data)
-                let articles = newsFeed.articles ?? []
-                print("Success -> \(#function)")
-                completion(.success(articles))
-            } catch  {
-                print("Error -> \(#function) : \(error.localizedDescription)")
-                completion(.failure(.decodingError(error)))
+                let data = try Data(contentsOf: url)
+                let news: [Article] = try JSONDecoder().decode([Article].self, from: data)
+                completion(news, nil)
+            } catch {
+                completion(nil, FileError.fileDecodingFailed(name: "NewsData", error))
             }
+        } else {
+            completion(nil, FileError.fileNotFound(name: "NewsData"))
         }
-        task.resume()
     }
 }

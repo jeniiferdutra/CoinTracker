@@ -12,7 +12,7 @@ class HeaderTableViewCellView: UIView {
     lazy var headerCardView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 51/255, green: 51/255, blue: 66/255, alpha: 1.0)
+        view.backgroundColor = UIColor.cellBackgroundColor
         view.layer.cornerRadius = 15
         view.applyShadow()
         return view
@@ -61,7 +61,6 @@ class HeaderTableViewCellView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(red: 23/255, green: 21/255, blue: 32/255, alpha: 1.0)
         addSuperView()
         configConstraints()
     }

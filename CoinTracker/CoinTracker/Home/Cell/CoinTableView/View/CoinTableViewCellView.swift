@@ -14,7 +14,7 @@ class CoinTableViewCellView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
-        view.backgroundColor = UIColor(red: 51/255, green: 51/255, blue: 66/255, alpha: 1.0)
+        view.backgroundColor = UIColor.cellBackgroundColor
         view.applyShadow()
         return view
     }()
@@ -59,7 +59,6 @@ class CoinTableViewCellView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .clear
         addViews()
         configConstraints()
     }

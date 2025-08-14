@@ -28,17 +28,15 @@ class SectionLabelTableViewCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     private func addSuperView() {
         addSubview(popularLabel)
-
     }
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
             popularLabel.topAnchor.constraint(equalTo: topAnchor),
             popularLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            popularLabel.heightAnchor.constraint(equalToConstant: 100),
+            popularLabel.heightAnchor.constraint(equalToConstant: 65),
             
         ])
     }

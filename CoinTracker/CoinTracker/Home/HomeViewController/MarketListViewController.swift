@@ -86,7 +86,7 @@ extension MarketListViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 200
         case 1:
-            return 70
+            return 65
         default:
             return 85
         }
