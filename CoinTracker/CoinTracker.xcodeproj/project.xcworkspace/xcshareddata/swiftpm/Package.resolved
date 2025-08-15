@@ -1,5 +1,5 @@
 {
-  "originHash" : "fb35080b84439104fc9553cd8b98545d00028921a7f0e93a1c3d6289e2216869",
+  "originHash" : "a45ceac384507ac49bc43c90533e17abd626d00f345688c1bc34ba1be6332945",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -143,6 +143,15 @@
       "state" : {
         "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
         "version" : "2.30910.0"
+      }
+    },
+    {
+      "identity" : "ohhttpstubs",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AliSoftware/OHHTTPStubs.git",
+      "state" : {
+        "revision" : "12f19662426d0434d6c330c6974d53e2eb10ecd9",
+        "version" : "9.1.0"
       }
     },
     {

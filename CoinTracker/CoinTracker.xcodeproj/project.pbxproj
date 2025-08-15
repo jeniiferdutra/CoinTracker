@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D02611072E4FEEF500AE6999 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = D02611062E4FEEF400AE6999 /* OHHTTPStubs */; };
+		D02611092E4FEEF500AE6999 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D02611082E4FEEF500AE6999 /* OHHTTPStubsSwift */; };
 		D03C00F72E0E4D4D00C1E61B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D03C00F62E0E4D4D00C1E61B /* GoogleSignIn */; };
 		D03C00F92E0E4D4D00C1E61B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D03C00F82E0E4D4D00C1E61B /* GoogleSignInSwift */; };
 		D0C019812E15F51C005A0414 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D0C019802E15F51C005A0414 /* FacebookCore */; };
@@ -15,7 +17,18 @@
 		D0E4E69B2E0A4B7C009A91B1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D0E4E69A2E0A4B7C009A91B1 /* FirebaseCrashlytics */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D02610D82E4FE1E300AE6999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0589FE02DE129A100E252EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0589FE72DE129A100E252EB;
+			remoteInfo = CoinTracker;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		D02610D42E4FE1E300AE6999 /* CoinTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0589FE82DE129A100E252EB /* CoinTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -30,6 +43,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D02610D52E4FE1E300AE6999 /* CoinTrackerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CoinTrackerTests;
+			sourceTree = "<group>";
+		};
 		D0589FEA2DE129A100E252EB /* CoinTracker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -41,6 +59,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D02610D12E4FE1E300AE6999 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D02611072E4FEEF500AE6999 /* OHHTTPStubs in Frameworks */,
+				D02611092E4FEEF500AE6999 /* OHHTTPStubsSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0589FE52DE129A100E252EB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				D0589FEA2DE129A100E252EB /* CoinTracker */,
+				D02610D52E4FE1E300AE6999 /* CoinTrackerTests */,
 				D0589FE92DE129A100E252EB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				D0589FE82DE129A100E252EB /* CoinTracker.app */,
+				D02610D42E4FE1E300AE6999 /* CoinTrackerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,6 +105,31 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D02610D32E4FE1E300AE6999 /* CoinTrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D02610DC2E4FE1E300AE6999 /* Build configuration list for PBXNativeTarget "CoinTrackerTests" */;
+			buildPhases = (
+				D02610D02E4FE1E300AE6999 /* Sources */,
+				D02610D12E4FE1E300AE6999 /* Frameworks */,
+				D02610D22E4FE1E300AE6999 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D02610D92E4FE1E300AE6999 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D02610D52E4FE1E300AE6999 /* CoinTrackerTests */,
+			);
+			name = CoinTrackerTests;
+			packageProductDependencies = (
+				D02611062E4FEEF400AE6999 /* OHHTTPStubs */,
+				D02611082E4FEEF500AE6999 /* OHHTTPStubsSwift */,
+			);
+			productName = CoinTrackerTests;
+			productReference = D02610D42E4FE1E300AE6999 /* CoinTrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D0589FE72DE129A100E252EB /* CoinTracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0589FFB2DE129A400E252EB /* Build configuration list for PBXNativeTarget "CoinTracker" */;
@@ -114,6 +168,10 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					D02610D32E4FE1E300AE6999 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D0589FE72DE129A100E252EB;
+					};
 					D0589FE72DE129A100E252EB = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -132,6 +190,7 @@
 				D0E4E6972E0A4B7C009A91B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D03C00F52E0E4D4D00C1E61B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				D0C0197F2E15F51C005A0414 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				D02611052E4FEEF400AE6999 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D0589FE92DE129A100E252EB /* Products */;
@@ -139,11 +198,19 @@
 			projectRoot = "";
 			targets = (
 				D0589FE72DE129A100E252EB /* CoinTracker */,
+				D02610D32E4FE1E300AE6999 /* CoinTrackerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D02610D22E4FE1E300AE6999 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0589FE62DE129A100E252EB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +221,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D02610D02E4FE1E300AE6999 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0589FE42DE129A100E252EB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,7 +237,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D02610D92E4FE1E300AE6999 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0589FE72DE129A100E252EB /* CoinTracker */;
+			targetProxy = D02610D82E4FE1E300AE6999 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		D02610DA2E4FE1E300AE6999 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 273F76QQVA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = backfront.CoinTrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinTracker";
+			};
+			name = Debug;
+		};
+		D02610DB2E4FE1E300AE6999 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 273F76QQVA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = backfront.CoinTrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinTracker";
+			};
+			name = Release;
+		};
 		D0589FFC2DE129A400E252EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -352,6 +470,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D02610DC2E4FE1E300AE6999 /* Build configuration list for PBXNativeTarget "CoinTrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D02610DA2E4FE1E300AE6999 /* Debug */,
+				D02610DB2E4FE1E300AE6999 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D0589FE32DE129A100E252EB /* Build configuration list for PBXProject "CoinTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -373,6 +500,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D02611052E4FEEF400AE6999 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
 		D03C00F52E0E4D4D00C1E61B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -400,6 +535,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D02611062E4FEEF400AE6999 /* OHHTTPStubs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D02611052E4FEEF400AE6999 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubs;
+		};
+		D02611082E4FEEF500AE6999 /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D02611052E4FEEF400AE6999 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubsSwift;
+		};
 		D03C00F62E0E4D4D00C1E61B /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D03C00F52E0E4D4D00C1E61B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
