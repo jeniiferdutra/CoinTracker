@@ -9,6 +9,11 @@ Aplicativo iOS desenvolvido com Swift que consome APIs públicas de criptomoedas
 
 ---
 
+## 📸 Preview
+
+<img width="1536" height="1024" alt="ChatGPT Image 20_08_2025, 19_25_29" src="https://github.com/user-attachments/assets/2245c25b-415a-4a16-90b7-be9659c0e30b" />
+
+
 ## 📱 Funcionalidades
 
 - [x] Consumo de API REST para criptomoedas
